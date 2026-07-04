@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Merge PDF Online - Combine PDF Files Free | AIFreePDF</title>
+  <meta name="description" content="Easily combine multiple PDF files into one document online for free. Merge PDFs in any order — fast, secure, and entirely in your browser."/>
+  <meta name="keywords" content="merge pdf, combine pdf files, join pdf online, merge pdf free, pdf merger, combine multiple pdfs"/>
+  <meta name="robots" content="index, follow"/>
+  <meta name="author" content="AIFreePDF"/>
+  <link rel="canonical" href="https://aifreepdf.netlify.app/merge-pdf.html"/>
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://aifreepdf.netlify.app/merge-pdf.html"/>
+  <meta property="og:title" content="Merge PDF Online Free – AIFreePDF"/>
+  <meta property="og:description" content="Easily combine multiple PDF files into one document online for free. Merge PDFs in any order — fast, secure, and entirely in your browser."/>
+  <meta property="og:image" content="https://aifreepdf.netlify.app/favicon.png"/>
+  <meta property="og:site_name" content="AIFreePDF"/>
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Merge PDF Online Free – AIFreePDF"/>
+  <meta name="twitter:description" content="Easily combine multiple PDF files into one document online for free. Merge PDFs in any order — fast, secure, and entirely in your browser."/>
+  <meta name="twitter:image" content="https://aifreepdf.netlify.app/favicon.png"/>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Merge PDF Online Free – AIFreePDF",
+    "url": "https://aifreepdf.netlify.app/merge-pdf.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "description": "Easily combine multiple PDF files into one document online for free. Merge PDFs in any order — fast, secure, and entirely in your browser."
+  }
+  </script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4LRDE0PHS7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4LRDE0PHS7');
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="icon" href="favicon.png" type="image/png" sizes="48x48">
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/@cantoo/pdf-lib@2.3.2/dist/pdf-lib.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="#" class="logo">AIFree<span>PDF</span></a>
+    <div class="nav-links">
+      <a href="#tools">Tools</a>
+      <a href="#how">How it Works</a>
+      <a href="#faq">FAQ</a>
+      <a href="blog.html">Blog</a>
+    </div>
+    <div class="nav-right">
+      <button class="nav-cta" onclick="scrollToTools()">Get Started</button>
+      <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobile-drawer">
+    <a href="index.html#tools" onclick="closeMobileMenu()">Tools</a>
+    <a href="index.html#how" onclick="closeMobileMenu()">How it Works</a>
+    <a href="index.html#faq" onclick="closeMobileMenu()">FAQ</a>
+    <a href="blog.html" onclick="closeMobileMenu()">Blog</a>
+    <button class="nav-cta mobile-cta" onclick="closeMobileMenu();scrollToTools()">Get Started</button>
+  </div>
+</nav>
+
+<!-- ── TOOL PAGE HERO (SEO H1 + INTRO) ── -->
+<section class="tool-page-hero">
+  <div class="container">
+    <h1 class="tool-page-h1">Merge PDF Files — Combine Multiple PDFs Into One</h1>
+    <p class="tool-page-intro">Combine two or more PDF files into a single document in the order you choose. No file size limits, no account needed.</p>
+  </div>
+</section>
+
+<!-- ── TOOL WORKSPACE (this tool, always open) ── -->
+<section class="workspace visible" id="workspace">
+  <div class="container">
+    <div class="tool-panel active" id="panel-merge">
+      <div class="panel-header">
+        <button class="back-btn" onclick="window.location.href='index.html#tools'">← Back to Tools</button>
+        <h2>🔗 Merge PDFs</h2>
+        <p>Combine multiple PDFs in any order</p>
+      </div>
+      <div class="upload-zone multi" id="merge-zone" ondrop="handleDrop(event,'merge')" ondragover="preventDefault(event)" onclick="triggerInput('merge-input')">
+        <div class="upload-icon">📄</div>
+        <p>Add PDF Files to Merge</p>
+        <span>Multiple files allowed · Drag to reorder</span>
+        <input type="file" id="merge-input" accept=".pdf" multiple style="display:none" onchange="handleFile(event,'merge')"/>
+      </div>
+      <div class="file-list" id="merge-files"></div>
+      <div class="options-panel" id="merge-options" style="display:none">
+        <div class="progress-container" id="merge-progress" style="display:none">
+          <div class="progress-label"><span id="merge-status">Merging...</span><span id="merge-pct">0%</span></div>
+          <div class="progress-bar"><div class="progress-fill-bar" id="merge-bar"></div></div>
+        </div>
+        <button class="btn-primary full-width" onclick="mergePDFs()">🔗 Merge All PDFs</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── OTHER TOOLS (cross-links for SEO + UX) ── -->
+<!-- ── TOOLS GRID ── -->
+<section class="tools-section" id="tools">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">All Tools</span>
+      <h2>Everything Your PDF Needs</h2>
+      <p>Professional-grade tools powered entirely in your browser.</p>
+    </div>
+    <div class="tools-grid">
+
+      <div class="tool-card active" data-tool="compress" onclick="window.location.href='compress-pdf.html'">
+        <div class="tool-tag">Most Popular</div>
+        <div class="tool-icon" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)">📦</div>
+        <h3>PDF Compressor</h3>
+        <p>Reduce file size up to 90% while maintaining quality</p>
+      </div>
+
+      <div class="tool-card" data-tool="img2pdf" onclick="window.location.href='jpg-to-pdf.html'">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)">🖼️</div>
+        <h3>Image to PDF</h3>
+        <p>Convert JPG, PNG, WEBP images into a PDF document</p>
+      </div>
+
+      <div class="tool-card" data-tool="merge" onclick="window.location.href='merge-pdf.html'">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#10b981,#047857)">🔗</div>
+        <h3>Merge PDFs</h3>
+        <p>Combine multiple PDFs into one single file</p>
+      </div>
+
+      <div class="tool-card" data-tool="split" onclick="window.location.href='split-pdf.html'">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#f59e0b,#b45309)">✂️</div>
+        <h3>Split PDF</h3>
+        <p>Extract pages or split PDF into multiple files</p>
+      </div>
+
+      <div class="tool-card" data-tool="rotate" onclick="window.location.href='rotate-pdf.html'">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#ef4444,#b91c1c)">🔄</div>
+        <h3>Rotate PDF</h3>
+        <p>Rotate one or all pages by 90°, 180°, or 270°</p>
+      </div>
+
+      <div class="tool-card" data-tool="pdf2img" onclick="window.location.href='pdf-to-jpg.html'">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#06b6d4,#0e7490)">📸</div>
+        <h3>PDF to Images</h3>
+        <p>Export each PDF page as high-quality PNG image</p>
+      </div>
+
+      <div class="tool-card" data-tool="reorder" onclick="window.location.href='reorder-pdf.html'">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#ec4899,#9d174d)">📋</div>
+        <h3>Reorder Pages</h3>
+        <p>Drag and drop to rearrange PDF pages</p>
+      </div>
+
+      <div class="tool-card" data-tool="protect" onclick="window.location.href='protect-pdf.html'">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#64748b,#334155)">🔒</div>
+        <h3>Protect PDF</h3>
+        <p>Add password protection to your PDF</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="how-section" id="how">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">Simple Process</span>
+      <h2>How It Works</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-icon">📂</div>
+        <h3>Upload</h3>
+        <p>Drag & drop or click to select your file. Nothing is sent to any server.</p>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-icon">⚙️</div>
+        <h3>Configure</h3>
+        <p>Choose your settings. Every tool gives you full control over the output.</p>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-icon">⬇️</div>
+        <h3>Download</h3>
+        <p>Your processed file downloads instantly. Done.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">Questions</span>
+      <h2>Frequently Asked</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-q">Are my files safe? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Yes — 100%. All processing happens locally in your browser using JavaScript. Your files are never uploaded to any server. We can't see them even if we wanted to.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-q">Is there a file size limit? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">No hard limit from our side, but very large files (100MB+) may be slow depending on your device's RAM and CPU. Most PDFs work instantly.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-q">Does it work offline? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Once the page is loaded, all tools work offline since processing is done locally. You only need internet to load the page initially.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-q">Will it add a watermark? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Never. AIFreePDF adds no watermarks, no branding, no hidden metadata. What you compress is what you get.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="logo">AIFree<span>PDF</span></a>
+        <p>Professional PDF tools. Free forever. Private by design.</p>
+      </div>
+      <div class="footer-links">
+        <span>PDF Compressor</span>
+        <span>Image to PDF</span>
+        <span>Merge PDF</span>
+        <span>Split PDF</span>
+        <span>Rotate PDF</span>
+        <span>PDF to Images</span>
+        <span>Improve Image Quality</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 AIFreePDF · All processing happens in your browser · No data collected</p>
+      <p class="dev-credit">Developed by <span>Arvind Kumar Pandey</span></p>
+    </div>
+  </div>
+</footer>
+
+<!-- ── COMPRESS DOWNLOAD OVERLAY ── -->
+<div class="dl-overlay" id="dl-overlay">
+  <div class="dl-card" id="dl-card">
+
+    <!-- STEP 1: Processing -->
+    <div class="dl-step" id="dl-step-processing">
+      <div class="dl-anim-wrap">
+        <div class="dl-spinner-ring"></div>
+        <div class="dl-spinner-ring dl-ring2"></div>
+        <div class="dl-center-icon" id="dl-center-icon">⚙️</div>
+      </div>
+      <h2 class="dl-title">Processing your file</h2>
+      <p class="dl-sub" id="dl-status-text">Please wait...</p>
+      <div class="dl-progress-wrap">
+        <div class="dl-progress-track">
+          <div class="dl-progress-fill" id="dl-bar"></div>
+        </div>
+        <span class="dl-pct" id="dl-pct">0%</span>
+      </div>
+      <div class="dl-file-info" id="dl-file-info"></div>
+    </div>
+
+    <!-- STEP 2: Success -->
+    <div class="dl-step" id="dl-step-success" style="display:none">
+      <div class="dl-success-icon">
+        <div class="dl-checkmark">
+          <svg viewBox="0 0 52 52"><circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/><path class="checkmark-check" fill="none" d="M14 27 l8 8 l16-16"/></svg>
+        </div>
+      </div>
+      <h2 class="dl-title">File Ready!</h2>
+      <p class="dl-sub">Click below to download your file.</p>
+      <div class="dl-result-stats" id="dl-result-stats"></div>
+      <div class="dl-actions">
+        <button class="btn-primary" id="dl-download-again" onclick="downloadAgain()">⬇ Download Again</button>
+        <button class="dl-back-btn" onclick="closeDLOverlay()">← Process Another File</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: Error -->
+    <div class="dl-step" id="dl-step-error" style="display:none">
+      <div class="dl-error-icon">❌</div>
+      <h2 class="dl-title">Processing Failed</h2>
+      <p class="dl-sub" id="dl-error-msg">Something went wrong. Please try again.</p>
+      <button class="dl-back-btn" onclick="closeDLOverlay()">← Try Again</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script src="js/pdf-engine.js"></script>
+<script src="js/app.js"></script>
+<script>
+  // This page is dedicated to one tool — hide back button (no single-page panel switching needed)
+  document.addEventListener('DOMContentLoaded', function() {
+    var backBtn = document.querySelector('.tool-panel .back-btn');
+    if (backBtn) {
+      backBtn.textContent = '← All Tools';
+      backBtn.setAttribute('onclick', "window.location.href='index.html#tools'");
+    }
+  });
+</script>
+</body>
+</html>

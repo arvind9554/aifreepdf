@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TextLens™ OCR – Extract Text from Image or PDF Free | AIFreePDF</title>
+  <meta name="description" content="Extract editable text from any image or scanned PDF using AI-powered OCR. Supports JPG, PNG, PDF. Free, browser-based, no signup."/>
+  <meta name="keywords" content="ocr online free, image to text, extract text from image, pdf ocr, scanned pdf to text, photo to text, ai ocr"/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://aifreepdf.netlify.app/ai-ocr.html"/>
+  <meta property="og:title" content="TextLens™ OCR – Extract Text from Image | AIFreePDF"/>
+  <meta property="og:description" content="Extract editable text from any image or scanned PDF instantly. AI-powered OCR, free and private."/>
+  <meta property="og:image" content="https://aifreepdf.netlify.app/favicon.png"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="TextLens™ OCR – Extract Text from Image | AIFreePDF"/>
+  <meta name="twitter:description" content="Extract editable text from any image or scanned PDF instantly."/>
+  <meta name="twitter:image" content="https://aifreepdf.netlify.app/favicon.png"/>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"TextLens OCR","url":"https://aifreepdf.netlify.app/ai-ocr.html","applicationCategory":"Utility","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4LRDE0PHS7"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4LRDE0PHS7');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" href="favicon.png" type="image/png" sizes="48x48">
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <!-- Tesseract.js OCR engine (fully browser-based, no API key needed) -->
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">AIFree<span>PDF</span></a>
+    <div class="nav-links">
+      <a href="index.html#tools">Tools</a>
+      <a href="index.html#how">How it Works</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="blog.html">Blog</a>
+    </div>
+    <div class="nav-right">
+      <button class="nav-cta" onclick="window.location.href='index.html#tools'">Get Started</button>
+      <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobile-drawer">
+    <a href="index.html#tools" onclick="closeMobileMenu()">Tools</a>
+    <a href="index.html#how" onclick="closeMobileMenu()">How it Works</a>
+    <a href="index.html#faq" onclick="closeMobileMenu()">FAQ</a>
+    <a href="blog.html" onclick="closeMobileMenu()">Blog</a>
+    <button class="nav-cta mobile-cta" onclick="closeMobileMenu()">Get Started</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="ai-hero-section">
+  <div class="container" style="text-align:center">
+    <div class="ai-hero-badge">✦ Powered by AI OCR</div>
+    <h1 class="ai-hero-title">TextLens™ — Image to Editable Text</h1>
+    <p class="ai-hero-sub">Snap a photo of a book, receipt, notice, or handout — and get fully editable text in seconds. Powered by AI character recognition. No server. No upload. 100% private.</p>
+    <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:100px;font-size:.78rem;font-weight:700;color:#34d399;margin-top:8px">
+      ✅ Fully Live — Works Right Now
+    </div>
+  </div>
+</section>
+
+<!-- WORKSPACE -->
+<section class="workspace visible" style="padding:20px 0 80px">
+  <div class="container">
+    <div class="ai-workspace">
+
+      <div class="ai-workspace-header">
+        <div class="ai-workspace-icon" style="background:linear-gradient(135deg,#f59e0b,#b45309)">🔎</div>
+        <div>
+          <h2>TextLens™ OCR</h2>
+          <p>Upload an image or scanned PDF — get the text instantly.</p>
+        </div>
+      </div>
+
+      <button class="back-btn ai-back-btn" onclick="window.location.href='index.html#tools'">← Back to Tools</button>
+
+      <!-- Upload -->
+      <div class="ai-upload-zone" id="ocr-zone" onclick="document.getElementById('ocr-input').click()"
+           ondragover="event.preventDefault();this.classList.add('drag-over')"
+           ondragleave="this.classList.remove('drag-over')"
+           ondrop="handleOCRDrop(event)">
+        <div class="upload-icon">🖼️</div>
+        <p>Drop image or scanned PDF here</p>
+        <span>JPG · PNG · WEBP · BMP · PDF (scanned) — all supported</span>
+        <input type="file" id="ocr-input" accept="image/*,.pdf" style="display:none" onchange="loadOCRFile(event)"/>
+      </div>
+
+      <div class="ai-file-info" id="ocr-file-info">
+        <span class="fi-icon">🖼️</span>
+        <span class="fi-name" id="ocr-file-name">—</span>
+        <span class="fi-size" id="ocr-file-size">—</span>
+        <button class="fi-remove" onclick="clearOCRFile()">✕</button>
+      </div>
+
+      <!-- Language -->
+      <div class="option-group" id="ocr-lang-group" style="display:none;margin-top:16px">
+        <label>Text Language (improves accuracy)</label>
+        <select id="ocr-lang">
+          <option value="eng">English</option>
+          <option value="hin">Hindi (हिन्दी)</option>
+          <option value="eng+hin">English + Hindi</option>
+        </select>
+      </div>
+
+      <!-- Image Preview -->
+      <div id="ocr-preview-wrap" style="display:none;margin-top:16px;text-align:center">
+        <img id="ocr-preview-img" style="max-width:100%;max-height:240px;border-radius:10px;border:1px solid rgba(245,158,11,0.25)"/>
+      </div>
+
+      <!-- Run OCR button -->
+      <button class="btn-ai" id="ocr-btn" onclick="runOCR()" disabled
+              style="background:linear-gradient(135deg,#f59e0b,#b45309);margin-top:16px">
+        🔎 Extract Text with AI
+      </button>
+
+      <!-- Progress -->
+      <div class="ai-loader" id="ocr-loader">
+        <div style="margin:8px 0">
+          <div style="height:6px;background:var(--border);border-radius:3px;overflow:hidden">
+            <div id="ocr-progress-bar" style="height:100%;width:0%;background:linear-gradient(90deg,#f59e0b,#7c3aed);border-radius:3px;transition:width .3s ease"></div>
+          </div>
+        </div>
+        <p id="ocr-progress-label">Initializing AI engine<span class="ai-loader-dots"></span></p>
+        <p style="font-size:.75rem;color:#6b5fa0;margin-top:4px">First run downloads the OCR model (~10MB). Subsequent runs are instant.</p>
+      </div>
+
+      <!-- Result -->
+      <div class="ai-result-box" id="ocr-result">
+        <div class="ai-result-label">🔎 Extracted Text</div>
+        <div class="ai-result-text" id="ocr-result-text" contenteditable="true" spellcheck="false"
+             style="min-height:80px;outline:none;cursor:text"></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+          <button class="ocr-copy-btn" onclick="copyResult('ocr-result-text')">📋 Copy All Text</button>
+          <button class="ocr-copy-btn" onclick="downloadOCRText()" style="background:rgba(16,185,129,0.1);border-color:rgba(16,185,129,0.3);color:#34d399">⬇ Download .txt</button>
+        </div>
+        <p style="font-size:.75rem;color:#6b5fa0;margin-top:10px">✏️ You can edit the text directly above before copying.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="tools-section" style="padding:60px 0">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">✦ Why TextLens™</span>
+      <h2>Turn Any Image Into Text — Instantly</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:8px">
+      <div class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#f59e0b,#b45309)">📚</div><h3>Students</h3><p>Photograph your textbook page and get copy-paste text for notes, assignments, or research.</p></div>
+      <div class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#f59e0b,#b45309)">🧾</div><h3>Receipts & Docs</h3><p>Extract data from bills, receipts, or official notices without typing a single word.</p></div>
+      <div class="tool-card"><div class="tool-icon" style="background:linear-gradient(135deg,#f59e0b,#b45309)">🔒</div><h3>Zero Upload</h3><p>All OCR processing runs 100% in your browser. Your image never leaves your device.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand"><a href="index.html" class="logo">AIFree<span>PDF</span></a><p>Professional PDF tools. Free forever. Private by design.</p></div>
+      <div class="footer-links"><span>PDF Compressor</span><span>Merge PDF</span><span>Split PDF</span><span>PDF to Images</span><span>Improve Image Quality</span></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 AIFreePDF · All processing happens in your browser · No data collected</p>
+      <p class="dev-credit">Developed by <span>Arvind Kumar Pandey</span></p>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+<script src="js/pdf-engine.js"></script>
+<script src="js/app.js"></script>
+<script src="js/ai-ocr.js"></script>
+<script>
+function toggleMobileMenu(){var d=document.getElementById('mobile-drawer'),b=document.getElementById('hamburger');if(!d||!b)return;d.classList.toggle('open');b.classList.toggle('open');}
+function closeMobileMenu(){document.getElementById('mobile-drawer')?.classList.remove('open');document.getElementById('hamburger')?.classList.remove('open');}
+document.addEventListener('click',function(e){var d=document.getElementById('mobile-drawer'),b=document.getElementById('hamburger');if(!d||!b)return;if(!d.contains(e.target)&&!b.contains(e.target)){d.classList.remove('open');b.classList.remove('open');}});
+</script>
+</body>
+</html>

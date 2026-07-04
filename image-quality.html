@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Improve Image Quality Online Free - Sharpen, Upscale, Denoise | AIFreePDF</title>
+  <meta name="description" content="Improve image quality online for free. Sharpen blurry photos, upscale resolution, remove compression noise, or manually adjust brightness and contrast — all in your browser."/>
+  <meta name="keywords" content="improve image quality, sharpen image online, upscale image, denoise photo, image enhancer, photo quality improver, free image editor"/>
+  <meta name="robots" content="index, follow"/>
+  <meta name="author" content="AIFreePDF"/>
+  <link rel="canonical" href="https://aifreepdf.netlify.app/image-quality.html"/>
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://aifreepdf.netlify.app/image-quality.html"/>
+  <meta property="og:title" content="Improve Image Quality – AIFreePDF"/>
+  <meta property="og:description" content="Improve image quality online for free. Sharpen blurry photos, upscale resolution, remove compression noise, or manually adjust brightness and contrast — all in your browser."/>
+  <meta property="og:image" content="https://aifreepdf.netlify.app/favicon.png"/>
+  <meta property="og:site_name" content="AIFreePDF"/>
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Improve Image Quality – AIFreePDF"/>
+  <meta name="twitter:description" content="Improve image quality online for free. Sharpen blurry photos, upscale resolution, remove compression noise, or manually adjust brightness and contrast — all in your browser."/>
+  <meta name="twitter:image" content="https://aifreepdf.netlify.app/favicon.png"/>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Improve Image Quality – AIFreePDF",
+    "url": "https://aifreepdf.netlify.app/image-quality.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "description": "Improve image quality online for free. Sharpen blurry photos, upscale resolution, remove compression noise, or manually adjust brightness and contrast — all in your browser."
+  }
+  </script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4LRDE0PHS7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4LRDE0PHS7');
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="icon" href="favicon.png" type="image/png" sizes="48x48">
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/@cantoo/pdf-lib@2.3.2/dist/pdf-lib.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="#" class="logo">AIFree<span>PDF</span></a>
+    <div class="nav-links">
+      <a href="#tools">Tools</a>
+      <a href="#how">How it Works</a>
+      <a href="#faq">FAQ</a>
+      <a href="blog.html">Blog</a>
+    </div>
+    <div class="nav-right">
+      <button class="nav-cta" onclick="scrollToTools()">Get Started</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ── TOOL PAGE HERO (SEO H1 + INTRO) ── -->
+<section class="tool-page-hero">
+  <div class="container">
+    <h1 class="tool-page-h1">Improve Image Quality — Sharpen, Upscale & Enhance</h1>
+    <p class="tool-page-intro">Pick exactly what your image needs — sharpen blur, boost resolution, clean up compression noise, or fine-tune brightness and contrast manually. All processed instantly in your browser.</p>
+  </div>
+</section>
+
+<!-- ── TOOL WORKSPACE ── -->
+<section class="workspace visible" id="workspace">
+  <div class="container">
+
+    <div class="tool-panel active" id="panel-imagequality">
+      <div class="panel-header">
+        <button class="back-btn" onclick="window.location.href='index.html#tools'">← All Tools</button>
+        <h2>✨ Improve Image Quality</h2>
+        <p>Choose how you want to enhance your image</p>
+      </div>
+
+      <!-- STEP 1: Upload -->
+      <div class="upload-zone" id="imgq-zone" ondrop="handleDrop(event,'imgq')" ondragover="preventDefault(event)" onclick="triggerInput('imgq-input')">
+        <div class="upload-icon">🖼️</div>
+        <p>Drag & Drop Image here</p>
+        <span>JPG, PNG, WEBP supported · or click to browse</span>
+        <input type="file" id="imgq-input" accept="image/*" style="display:none" onchange="handleFile(event,'imgq')"/>
+      </div>
+      <div class="file-list" id="imgq-files"></div>
+
+      <!-- STEP 2: Mode selector card (the "single card, multiple options" the user asked for) -->
+      <div class="iq-card" id="imgq-options" style="display:none">
+
+        <div class="iq-card-header">
+          <h3>What do you want to do?</h3>
+          <p>Select one enhancement mode below</p>
+        </div>
+
+        <div class="iq-mode-grid">
+          <button class="iq-mode-btn active" data-mode="sharpen" onclick="selectIQMode(this,'sharpen')">
+            <span class="iq-mode-icon">🔍</span>
+            <span class="iq-mode-title">Sharpen Image</span>
+            <span class="iq-mode-desc">Fix blurry photos and add crisp detail</span>
+          </button>
+
+          <button class="iq-mode-btn" data-mode="upscale" onclick="selectIQMode(this,'upscale')">
+            <span class="iq-mode-icon">📐</span>
+            <span class="iq-mode-title">Upscale Resolution</span>
+            <span class="iq-mode-desc">Increase image size while staying clean</span>
+          </button>
+
+          <button class="iq-mode-btn" data-mode="denoise" onclick="selectIQMode(this,'denoise')">
+            <span class="iq-mode-icon">🧹</span>
+            <span class="iq-mode-title">Remove Noise</span>
+            <span class="iq-mode-desc">Clean up compression artifacts and grain</span>
+          </button>
+
+          <button class="iq-mode-btn" data-mode="manual" onclick="selectIQMode(this,'manual')">
+            <span class="iq-mode-icon">🎛️</span>
+            <span class="iq-mode-title">Manual Adjust</span>
+            <span class="iq-mode-desc">Fine-tune brightness, contrast & sharpness</span>
+          </button>
+        </div>
+
+        <!-- Mode-specific controls -->
+        <div class="iq-mode-panel" id="iq-panel-sharpen">
+          <div class="option-group">
+            <label>Sharpen Strength</label>
+            <input type="range" id="iq-sharpen-amount" min="1" max="10" value="5" oninput="updateRangeLabel('iq-sharpen-amount','iq-sharpen-val')"/>
+            <div class="iq-range-row"><span>Subtle</span><span id="iq-sharpen-val" class="iq-range-val">5</span><span>Strong</span></div>
+          </div>
+        </div>
+
+        <div class="iq-mode-panel" id="iq-panel-upscale" style="display:none">
+          <div class="option-group">
+            <label>Scale Factor</label>
+            <div class="iq-scale-btns">
+              <button class="iq-scale-btn active" data-scale="1.5" onclick="selectScale(this)">1.5×</button>
+              <button class="iq-scale-btn" data-scale="2" onclick="selectScale(this)">2×</button>
+              <button class="iq-scale-btn" data-scale="3" onclick="selectScale(this)">3×</button>
+              <button class="iq-scale-btn" data-scale="4" onclick="selectScale(this)">4×</button>
+            </div>
+          </div>
+          <p class="iq-note">Higher scale factors take longer to process and produce larger files.</p>
+        </div>
+
+        <div class="iq-mode-panel" id="iq-panel-denoise" style="display:none">
+          <div class="option-group">
+            <label>Denoise Level</label>
+            <input type="range" id="iq-denoise-amount" min="1" max="10" value="5" oninput="updateRangeLabel('iq-denoise-amount','iq-denoise-val')"/>
+            <div class="iq-range-row"><span>Light</span><span id="iq-denoise-val" class="iq-range-val">5</span><span>Heavy</span></div>
+          </div>
+          <p class="iq-note">Higher denoise levels smooth more grain but may soften fine detail.</p>
+        </div>
+
+        <div class="iq-mode-panel" id="iq-panel-manual" style="display:none">
+          <div class="option-group">
+            <label>Brightness</label>
+            <input type="range" id="iq-brightness" min="-50" max="50" value="0" oninput="updateRangeLabel('iq-brightness','iq-brightness-val')"/>
+            <div class="iq-range-row"><span>Darker</span><span id="iq-brightness-val" class="iq-range-val">0</span><span>Brighter</span></div>
+          </div>
+          <div class="option-group">
+            <label>Contrast</label>
+            <input type="range" id="iq-contrast" min="-50" max="50" value="0" oninput="updateRangeLabel('iq-contrast','iq-contrast-val')"/>
+            <div class="iq-range-row"><span>Flat</span><span id="iq-contrast-val" class="iq-range-val">0</span><span>Punchy</span></div>
+          </div>
+          <div class="option-group">
+            <label>Sharpness</label>
+            <input type="range" id="iq-manual-sharp" min="0" max="10" value="0" oninput="updateRangeLabel('iq-manual-sharp','iq-manual-sharp-val')"/>
+            <div class="iq-range-row"><span>Soft</span><span id="iq-manual-sharp-val" class="iq-range-val">0</span><span>Crisp</span></div>
+          </div>
+          <div class="option-group">
+            <label>Saturation</label>
+            <input type="range" id="iq-saturation" min="-50" max="50" value="0" oninput="updateRangeLabel('iq-saturation','iq-saturation-val')"/>
+            <div class="iq-range-row"><span>Muted</span><span id="iq-saturation-val" class="iq-range-val">0</span><span>Vivid</span></div>
+          </div>
+        </div>
+
+        <!-- Live preview -->
+        <div class="iq-preview-wrap" id="iq-preview-wrap" style="display:none">
+          <div class="iq-preview-box">
+            <span class="iq-preview-label">Before</span>
+            <canvas id="iq-canvas-before"></canvas>
+          </div>
+          <div class="iq-preview-arrow">→</div>
+          <div class="iq-preview-box">
+            <span class="iq-preview-label">After</span>
+            <canvas id="iq-canvas-after"></canvas>
+          </div>
+        </div>
+
+        <div class="progress-container" id="imgq-progress" style="display:none">
+          <div class="progress-label"><span id="imgq-status">Processing...</span><span id="imgq-pct">0%</span></div>
+          <div class="progress-bar"><div class="progress-fill-bar" id="imgq-bar"></div></div>
+        </div>
+
+        <button class="btn-primary full-width" onclick="applyImageQuality()">✨ Apply & Download</button>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ── OTHER TOOLS (cross-links for SEO + UX) ── -->
+<section class="tools-section" id="tools">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">All Tools</span>
+      <h2>Everything Your PDF Needs</h2>
+      <p>Professional-grade tools powered entirely in your browser.</p>
+    </div>
+    <div class="tools-grid">
+
+      <div class="tool-card" data-tool="compress" onclick="window.location.href='compress-pdf.html'">
+        <div class="tool-tag">Most Popular</div>
+        <div class="tool-icon" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)">📦</div>
+        <h3>PDF Compressor</h3>
+        <p>Reduce file size up to 90% while maintaining quality</p>
+      </div>
+
+      <div class="tool-card" data-tool="img2pdf" onclick="window.location.href='jpg-to-pdf.html'">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)">🖼️</div>
+        <h3>Image to PDF</h3>
+        <p>Convert JPG, PNG, WEBP images into a PDF document</p>
+      </div>
+
+      <div class="tool-card" data-tool="merge" onclick="window.location.href='merge-pdf.html'">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#10b981,#047857)">🔗</div>
+        <h3>Merge PDFs</h3>
+        <p>Combine multiple PDFs into one single file</p>
+      </div>
+
+      <div class="tool-card" data-tool="split" onclick="window.location.href='split-pdf.html'">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#f59e0b,#b45309)">✂️</div>
+        <h3>Split PDF</h3>
+        <p>Extract pages or split PDF into multiple files</p>
+      </div>
+
+      <div class="tool-card" data-tool="rotate" onclick="window.location.href='rotate-pdf.html'">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#ef4444,#b91c1c)">🔄</div>
+        <h3>Rotate PDF</h3>
+        <p>Rotate one or all pages by 90°, 180°, or 270°</p>
+      </div>
+
+      <div class="tool-card" data-tool="pdf2img" onclick="window.location.href='pdf-to-jpg.html'">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#06b6d4,#0e7490)">📸</div>
+        <h3>PDF to Images</h3>
+        <p>Export each PDF page as high-quality PNG image</p>
+      </div>
+
+      <div class="tool-card" data-tool="reorder" onclick="window.location.href='reorder-pdf.html'">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#ec4899,#9d174d)">📋</div>
+        <h3>Reorder Pages</h3>
+        <p>Drag and drop to rearrange PDF pages</p>
+      </div>
+
+      <div class="tool-card" data-tool="protect" onclick="window.location.href='protect-pdf.html'">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#64748b,#334155)">🔒</div>
+        <h3>Protect PDF</h3>
+        <p>Add password protection to your PDF</p>
+      </div>
+
+      <div class="tool-card active" data-tool="imagequality" onclick="window.location.href='image-quality.html'">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#14b8a6,#0f766e)">✨</div>
+        <h3>Improve Image Quality</h3>
+        <p>Sharpen, upscale, denoise, or fine-tune any image</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="how-section" id="how">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">Simple Process</span>
+      <h2>How It Works</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-icon">📂</div>
+        <h3>Upload</h3>
+        <p>Drag & drop or click to select your file. Nothing is sent to any server.</p>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-icon">⚙️</div>
+        <h3>Configure</h3>
+        <p>Choose your settings. Every tool gives you full control over the output.</p>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-icon">⬇️</div>
+        <h3>Download</h3>
+        <p>Your processed file downloads instantly. Done.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">Questions</span>
+      <h2>Frequently Asked</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-q">Are my files safe? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Yes — 100%. All processing happens locally in your browser using JavaScript. Your files are never uploaded to any server. We can't see them even if we wanted to.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-q">Is there a file size limit? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">No hard limit from our side, but very large files (100MB+) may be slow depending on your device's RAM and CPU. Most images work instantly.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-q">Does it work offline? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Once the page is loaded, all tools work offline since processing is done locally. You only need internet to load the page initially.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-q">Will it add a watermark? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Never. AIFreePDF adds no watermarks, no branding, no hidden metadata. What you compress is what you get.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="logo">AIFree<span>PDF</span></a>
+        <p>Professional PDF tools. Free forever. Private by design.</p>
+      </div>
+      <div class="footer-links">
+        <span>PDF Compressor</span>
+        <span>Image to PDF</span>
+        <span>Merge PDF</span>
+        <span>Split PDF</span>
+        <span>Rotate PDF</span>
+        <span>PDF to Images</span>
+        <span>Improve Image Quality</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 AIFreePDF · All processing happens in your browser · No data collected</p>
+      <p class="dev-credit">Developed by <span>Arvind Kumar Pandey</span></p>
+    </div>
+  </div>
+</footer>
+
+<!-- ── DOWNLOAD OVERLAY ── -->
+<div class="dl-overlay" id="dl-overlay">
+  <div class="dl-card" id="dl-card">
+
+    <!-- STEP 1: Processing -->
+    <div class="dl-step" id="dl-step-processing">
+      <div class="dl-anim-wrap">
+        <div class="dl-spinner-ring"></div>
+        <div class="dl-spinner-ring dl-ring2"></div>
+        <div class="dl-center-icon" id="dl-center-icon">⚙️</div>
+      </div>
+      <h2 class="dl-title">Processing your file</h2>
+      <p class="dl-sub" id="dl-status-text">Please wait...</p>
+      <div class="dl-progress-wrap">
+        <div class="dl-progress-track">
+          <div class="dl-progress-fill" id="dl-bar"></div>
+        </div>
+        <span class="dl-pct" id="dl-pct">0%</span>
+      </div>
+      <div class="dl-file-info" id="dl-file-info"></div>
+    </div>
+
+    <!-- STEP 2: Success -->
+    <div class="dl-step" id="dl-step-success" style="display:none">
+      <div class="dl-success-icon">
+        <div class="dl-checkmark">
+          <svg viewBox="0 0 52 52"><circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/><path class="checkmark-check" fill="none" d="M14 27 l8 8 l16-16"/></svg>
+        </div>
+      </div>
+      <h2 class="dl-title">File Ready!</h2>
+      <p class="dl-sub">Click below to download your file.</p>
+      <div class="dl-result-stats" id="dl-result-stats"></div>
+      <div class="dl-actions">
+        <button class="btn-primary" id="dl-download-again" onclick="downloadAgain()">⬇ Download Again</button>
+        <button class="dl-back-btn" onclick="closeDLOverlay()">← Process Another File</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: Error -->
+    <div class="dl-step" id="dl-step-error" style="display:none">
+      <div class="dl-error-icon">❌</div>
+      <h2 class="dl-title">Processing Failed</h2>
+      <p class="dl-sub" id="dl-error-msg">Something went wrong. Please try again.</p>
+      <button class="dl-back-btn" onclick="closeDLOverlay()">← Try Again</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script src="js/pdf-engine.js"></script>
+<script src="js/app.js"></script>
+<script src="js/image-quality.js"></script>
+</body>
+</html>
