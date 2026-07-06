@@ -137,7 +137,7 @@ function addChatBubble(text, type, id) {
 
 // ── SECURE CALL TO NETLIFY BACKEND ──
 async function callSecureChatAPI(question, pdfText, history) {
-  const res = await fetch('/.netlify/functions/chat-pdf', {
+  const res = await fetch('/.vercel/api/chat-pdf', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({

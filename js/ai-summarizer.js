@@ -1,5 +1,12 @@
 // ── SWIFTMIND™ PDF SUMMARIZER — ai-summarizer.js ──
-// SECURE SETUP: API Key is now hidden safely in Netlify Environment Variables.
+// FREE SETUP: Get Gemini API key FREE at https://aistudio.google.com → "Get API Key"
+// No credit card needed. Just paste your key below and change provider to 'gemini'.
+
+// ── CONFIGURATION ──
+const SUMMARIZER_CONFIG = {
+  provider: 'gemini',              // FREE: 'gemini' | paid: 'anthropic' | paid: 'openai'
+  apiKey: 'YOUR_GEMINI_API_KEY',  // Get free key at: https://aistudio.google.com
+};
 
 let sumFile = null;
 let sumPDFText = '';
@@ -74,7 +81,7 @@ async function summarizePDF() {
   document.getElementById('sum-result').classList.remove('visible');
 
   try {
-    // Step 1: Extract text from PDF
+    // Step 1: Extract text from PDF (always works)
     if (!sumPDFText) {
       sumPDFText = await extractPDFText(sumFile);
     }
@@ -86,8 +93,16 @@ async function summarizePDF() {
       return;
     }
 
-    // Step 2: Send to SECURE Netlify Function (No visible API Key in browser)
-    const summary = await callSecureAIAPI(sumPDFText, lang);
+    // Step 2: Send to AI API (needs API key)
+    if (!SUMMARIZER_CONFIG.apiKey || SUMMARIZER_CONFIG.apiKey === 'YOUR_GEMINI_API_KEY' || SUMMARIZER_CONFIG.apiKey === 'YOUR_API_KEY') {
+      // Demo mode — show what the prompt would look like
+      showDemoMode(sumPDFText.slice(0, 300), lang);
+      loader.classList.remove('visible');
+      btn.disabled = false;
+      return;
+    }
+
+    const summary = await callAIAPI(sumPDFText, lang);
 
     document.getElementById('sum-result-text').textContent = summary;
     document.getElementById('sum-result').classList.add('visible');
@@ -102,8 +117,8 @@ async function summarizePDF() {
   }
 }
 
-// ── SECURE AI API CALL VIA NETLIFY FUNCTION ──
-async function callSecureAIAPI(pdfText, language) {
+// ── AI API CALL (configure when ready) ──
+async function callAIAPI(pdfText, language) {
   const prompt = `You are a professional document summarizer. Summarize the following PDF document content clearly and concisely in ${language}. 
   
 Format your response as:
@@ -121,20 +136,81 @@ Format your response as:
 Document Content:
 ${pdfText.slice(0, 12000)}`; // Limit to ~12k chars
 
-  // सीधे गूगल/ओपनएआई को कॉल करने के बजाय अपने सुरक्षित नेटलिफाई बैकएंड को कॉल करें
-  const res = await fetch('/.netlify/functions/summarizer', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ prompt: prompt })
-  });
+  if (SUMMARIZER_CONFIG.provider === 'gemini') {
+    const model = 'gemini-2.5-flash'; // fastest free model
+    const res = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${SUMMARIZER_CONFIG.apiKey}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: { maxOutputTokens: 1024, temperature: 0.4 }
+        })
+      }
+    );
+    const data = await res.json();
+    if (data.error) throw new Error(data.error.message);
+    return data.candidates[0].content.parts[0].text;
 
-  if (!res.ok) {
-    const errorData = await res.json().catch(() => ({}));
-    throw new Error(errorData.error || `Server responded with status ${res.status}`);
+  } else if (SUMMARIZER_CONFIG.provider === 'anthropic') {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': SUMMARIZER_CONFIG.apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true',
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 1024,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+    const data = await res.json();
+    if (data.error) throw new Error(data.error.message);
+    return data.content[0].text;
+
+  } else if (SUMMARIZER_CONFIG.provider === 'openai') {
+    const res = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${SUMMARIZER_CONFIG.apiKey}` },
+      body: JSON.stringify({
+        model: 'gpt-3.5-turbo',
+        max_tokens: 1024,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+    const data = await res.json();
+    if (data.error) throw new Error(data.error.message);
+    return data.choices[0].message.content;
   }
 
-  const data = await res.json();
-  return data.text; // बैकएंड से आया साफ़-सुथरा टेक्स्ट रिटर्न करें
+  throw new Error('No API provider configured. See SUMMARIZER_CONFIG in ai-summarizer.js');
+}
+
+// ── DEMO MODE (shown when no API key) ──
+function showDemoMode(textPreview, lang) {
+  const demoText = `⚙️ API KEY NOT CONFIGURED
+
+This tool is ready to work — it just needs an AI API key.
+
+📄 We successfully extracted text from your PDF!
+Preview: "${textPreview.slice(0, 200)}..."
+
+🔧 To activate:
+1. Open js/ai-summarizer.js
+2. Set SUMMARIZER_CONFIG.apiKey = 'your-key-here'
+3. Set SUMMARIZER_CONFIG.provider = 'anthropic' or 'openai'
+
+✅ The text extraction part is already working in your browser.
+    Once connected to an AI API, summaries will appear here.`;
+
+  document.getElementById('sum-result-text').textContent = demoText;
+  document.getElementById('sum-result').classList.add('visible');
+  document.getElementById('sum-api-notice').style.display = 'block';
+  document.getElementById('sum-result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 function copyResult(id) {

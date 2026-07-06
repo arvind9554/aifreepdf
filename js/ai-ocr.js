@@ -150,7 +150,7 @@ async function runOCR() {
 }
 
 async function callSecureOCRBackend(rawText) {
-  const res = await fetch('/.netlify/functions/ocr', {
+  const res = await fetch('/.vercel/api/ocr', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ rawText: rawText })
