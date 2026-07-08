@@ -104,7 +104,6 @@ async function sendChatMessage() {
   addChatBubble('Thinking...', 'ai', typingId);
 
   try {
-    // FIXED: Ab yeh correct Vercel endpoint call karega
     const answer = await callSecureChatAPI(question, chatPDFText, chatHistory);
 
     // Remove typing indicator and add real answer
@@ -126,13 +125,13 @@ async function sendChatMessage() {
   input.focus();
 }
 
-// Simple Helper to handle Markdown styles from Gemini
-// Simple Helper to handle chat formatting from Gemini response
+// FIXED: Global multi-line flags taaki multi-line hyphens aur bullets handle hon
 function formatChatMarkdown(text) {
   return text
     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.*?)\*/g, '<em>$1</em>')
-    .replace(/•\s*(.*?)(?=\n|$)/g, '<div style="margin-left: 15px; margin-bottom: 5px;">• $1</div>') // Robust bullet fix
+    .replace(/^-\s*(.*?)(?=\n|$)/gm, '<div style="margin-left: 15px; margin-bottom: 6px; display: list-item; list-style-type: disc;">$1</div>')
+    .replace(/^•\s*(.*?)(?=\n|$)/gm, '<div style="margin-left: 15px; margin-bottom: 6px; display: list-item; list-style-type: disc;">$1</div>')
     .replace(/\n/g, '<br>');
 }
 
@@ -143,9 +142,9 @@ function addChatBubble(text, type, id) {
   
   if (id) bubble.id = id;
   
-  // UI Improvement: Formatting handle karne ke liye innerHTML fallback
+  // FIXED: formatMarkdown ki jagah sahi function formatChatMarkdown call kiya h
   if (type === 'ai' && text !== 'Thinking...') {
-    bubble.innerHTML = formatMarkdown(text);
+    bubble.innerHTML = formatChatMarkdown(text);
   } else {
     bubble.textContent = text;
   }
@@ -156,7 +155,6 @@ function addChatBubble(text, type, id) {
 
 // ── SECURE CALL TO VERCEL BACKEND ──
 async function callSecureChatAPI(question, pdfText, history) {
-  // FIXED: Endpoint URL clean up kiya (.vercel hatakar direct /api)
   const res = await fetch('/api/chat-pdf', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

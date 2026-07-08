@@ -115,21 +115,21 @@ async function summarizePDF() {
 // ── SECURE CALL TO VERCEL BACKEND ──
 async function callSecureSummaryBackend(pdfText, language) {
   const prompt = `You are a professional document summarizer. Summarize the following PDF document content clearly and concisely in ${language}. 
-  
+
 Format your response exactly as:
 📌 MAIN TOPIC: (one line)
 
 🔑 KEY POINTS:
-• (point 1)
-• (point 2)
-• (point 3)
-• (point 4)
-• (point 5)
+- (point 1)
+- (point 2)
+- (point 3)
+- (point 4)
+- (point 5)
 
 💡 CONCLUSION: (2-3 lines)
 
 Document Content:
-${pdfText.slice(0, 12000)}`; // Limit to ~12k chars
+${pdfText.slice(0, 12000)}`;
 
   // Fetching from Vercel endpoint directly
   const res = await fetch('/api/summarizer', {

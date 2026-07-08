@@ -52,7 +52,7 @@ async function processOCRFile(file) {
 
   document.getElementById('ocr-btn').disabled = false;
   document.getElementById('ocr-result').classList.remove('visible');
-  document.getElementById('ocr-result-text').innerHTML = ''; // Fixed: Changed to innerHTML for clean resets
+  document.getElementById('ocr-result-text').innerHTML = ''; 
 }
 
 function clearOCRFile() {
@@ -90,13 +90,13 @@ async function pdfFirstPageToImage(file) {
   return canvas.toDataURL('image/png');
 }
 
-// Simple Helper to handle basic formatting from Gemini response
-// Simple Helper to handle basic formatting from Gemini response
+// FIXED: multi-line global rules taaki line-by-line bullets aur hyphens parse ho sakein
 function formatOcrMarkdown(text) {
   return text
     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.*?)\*/g, '<em>$1</em>')
-    .replace(/•\s*(.*?)(?=\n|$)/g, '<div style="margin-left: 15px; margin-bottom: 5px;">• $1</div>') // Robust bullet fix
+    .replace(/^-\s*(.*?)(?=\n|$)/gm, '<div style="margin-left: 15px; margin-bottom: 6px; display: list-item; list-style-type: disc;">$1</div>')
+    .replace(/^•\s*(.*?)(?=\n|$)/gm, '<div style="margin-left: 15px; margin-bottom: 6px; display: list-item; list-style-type: disc;">$1</div>')
     .replace(/\n/g, '<br>');
 }
 
@@ -145,7 +145,6 @@ async function runOCR() {
     progressLabel.innerHTML = `AI is polishing and formatting text...<span class="ai-loader-dots"></span>`;
     const aiPolishedText = await callSecureOCRBackend(cleanedText);
 
-    // FIXED: innerHTML use kiya taaki AI ke diye hue breaks/bold tags structure break na karein
     document.getElementById('ocr-result-text').innerHTML = formatOcrMarkdown(aiPolishedText);
     result.classList.add('visible');
     loader.classList.remove('visible');
@@ -161,7 +160,6 @@ async function runOCR() {
 }
 
 async function callSecureOCRBackend(rawText) {
-  // FIXED: Endpoint URL se "/.vercel" remove kiya
   const res = await fetch('/api/ocr', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -174,7 +172,6 @@ async function callSecureOCRBackend(rawText) {
 
 function copyResult(id) {
   const el = document.getElementById(id);
-  // Download/Copy ke liye clean text extract karne ka backup logic
   const text = el.innerText || el.textContent || '';
   navigator.clipboard.writeText(text).then(() => {
     showToast('✅ Text copied!', 'success');
