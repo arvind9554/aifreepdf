@@ -30,8 +30,8 @@ ${safePdfText}`;
     
     const fullPrompt = systemPrompt + (conversationText ? '\n\nConversation so far:\n' + conversationText : '') + `\n\nUser: ${question}\nAssistant:`;
 
-    // 2. Correct Gemini API Endpoint (Gemini 1.5 Flash recommended for fast text tasks)
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+    // 2. Correct Gemini API Endpoint (Gemini 2.5 Flash recommended for fast text tasks)
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
     const response = await fetch(url, {
       method: 'POST',

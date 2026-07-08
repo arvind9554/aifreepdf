@@ -23,8 +23,8 @@ export default async function handler(req, res) {
 
     const prompt = `You are an AI OCR assistant. Clean up, correct any clear typo mistakes, and professionally format the following raw text extracted from a document. Keep the original meaning exactly same and do not add extra explanations:\n\n${safeRawText}`;
 
-    // 2. Correct Gemini API Endpoint (Gemini 1.5 Flash text tasks ke liye best aur fast hai)
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+    // 2. Correct Gemini API Endpoint (Gemini 2.5 Flash text tasks ke liye best aur fast hai)
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
     const response = await fetch(url, {
       method: 'POST',
