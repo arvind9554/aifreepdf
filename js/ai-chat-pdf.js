@@ -1,5 +1,5 @@
 // ── DOCUTALK™ CHAT WITH PDF — ai-chat-pdf.js ──
-// SECURE SETUP: API Key is now hidden safely in Netlify Environment Variables.
+// SECURE SETUP: API Key is now hidden safely in Vercel Environment Variables.
 
 let chatFile = null;
 let chatPDFText = '';
@@ -101,10 +101,10 @@ async function sendChatMessage() {
 
   // Typing indicator
   const typingId = 'typing-' + Date.now();
-  addChatBubble('...', 'ai', typingId);
+  addChatBubble('Thinking...', 'ai', typingId);
 
   try {
-    // SECURE Netlify Function call
+    // FIXED: Ab yeh correct Vercel endpoint call karega
     const answer = await callSecureChatAPI(question, chatPDFText, chatHistory);
 
     // Remove typing indicator and add real answer
@@ -119,25 +119,44 @@ async function sendChatMessage() {
     const typingEl = document.getElementById(typingId);
     if (typingEl) typingEl.remove();
     addChatBubble('Sorry, something went wrong. Please try again.', 'ai');
+    console.error(err);
   }
 
   document.getElementById('chat-send').disabled = false;
   input.focus();
 }
 
+// Simple Helper to handle Markdown styles from Gemini
+function formatMarkdown(text) {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold formatting
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')             // Italic formatting
+    .replace(/`([^`]+)`/g, '<code>$1</code>')         // Inline Code block
+    .replace(/\n/g, '<br>');                         // New lines
+}
+
 function addChatBubble(text, type, id) {
   const messages = document.getElementById('chat-messages');
   const bubble = document.createElement('div');
   bubble.className = `chat-bubble ${type}`;
-  bubble.textContent = text;
+  
   if (id) bubble.id = id;
+  
+  // UI Improvement: Formatting handle karne ke liye innerHTML fallback
+  if (type === 'ai' && text !== 'Thinking...') {
+    bubble.innerHTML = formatMarkdown(text);
+  } else {
+    bubble.textContent = text;
+  }
+  
   messages.appendChild(bubble);
   messages.scrollTop = messages.scrollHeight;
 }
 
-// ── SECURE CALL TO NETLIFY BACKEND ──
+// ── SECURE CALL TO VERCEL BACKEND ──
 async function callSecureChatAPI(question, pdfText, history) {
-  const res = await fetch('/.vercel/api/chat-pdf', {
+  // FIXED: Endpoint URL clean up kiya (.vercel hatakar direct /api)
+  const res = await fetch('/api/chat-pdf', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({

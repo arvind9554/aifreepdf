@@ -1,5 +1,5 @@
 // ── TEXTLENS™ AI OCR — ai-ocr.js ──
-// SECURE SETUP: Sends extracted text to Netlify Function for AI Formatting.
+// SECURE SETUP: Sends extracted text to Vercel Function for AI Formatting.
 
 let ocrFile = null;
 let ocrImageDataUrl = null;
@@ -52,7 +52,7 @@ async function processOCRFile(file) {
 
   document.getElementById('ocr-btn').disabled = false;
   document.getElementById('ocr-result').classList.remove('visible');
-  document.getElementById('ocr-result-text').textContent = '';
+  document.getElementById('ocr-result-text').innerHTML = ''; // Fixed: Changed to innerHTML for clean resets
 }
 
 function clearOCRFile() {
@@ -88,6 +88,14 @@ async function pdfFirstPageToImage(file) {
   canvas.height = viewport.height;
   await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
   return canvas.toDataURL('image/png');
+}
+
+// Simple Helper to handle basic formatting from Gemini response
+function formatOcrMarkdown(text) {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/\n/g, '<br>');
 }
 
 // ── MAIN OCR FUNCTION ──
@@ -131,11 +139,12 @@ async function runOCR() {
       return;
     }
 
-    // AI Enhancing step via Netlify Function
+    // AI Enhancing step via Vercel Function
     progressLabel.innerHTML = `AI is polishing and formatting text...<span class="ai-loader-dots"></span>`;
     const aiPolishedText = await callSecureOCRBackend(cleanedText);
 
-    document.getElementById('ocr-result-text').textContent = aiPolishedText;
+    // FIXED: innerHTML use kiya taaki AI ke diye hue breaks/bold tags structure break na karein
+    document.getElementById('ocr-result-text').innerHTML = formatOcrMarkdown(aiPolishedText);
     result.classList.add('visible');
     loader.classList.remove('visible');
     btn.disabled = false;
@@ -150,26 +159,29 @@ async function runOCR() {
 }
 
 async function callSecureOCRBackend(rawText) {
-  const res = await fetch('/.vercel/api/ocr', {
+  // FIXED: Endpoint URL se "/.vercel" remove kiya
+  const res = await fetch('/api/ocr', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ rawText: rawText })
   });
-  if (!res.ok) return rawText; // अगर AI फेल हो तो बैकअप में ओरिजिनल टेक्स्ट दिखा दें
+  if (!res.ok) return rawText; 
   const data = await res.json();
   return data.text || rawText;
 }
 
 function copyResult(id) {
   const el = document.getElementById(id);
-  const text = el.textContent || el.innerText || '';
+  // Download/Copy ke liye clean text extract karne ka backup logic
+  const text = el.innerText || el.textContent || '';
   navigator.clipboard.writeText(text).then(() => {
     showToast('✅ Text copied!', 'success');
   });
 }
 
 function downloadOCRText() {
-  const text = document.getElementById('ocr-result-text').textContent || '';
+  const el = document.getElementById('ocr-result-text');
+  const text = el.innerText || el.textContent || '';
   if (!text) return showToast('Nothing to download yet', 'error');
   const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
   downloadBlob(blob, (ocrFile?.name?.replace(/\.[^.]+$/, '') || 'extracted') + '-text.txt');
