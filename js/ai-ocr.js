@@ -91,10 +91,12 @@ async function pdfFirstPageToImage(file) {
 }
 
 // Simple Helper to handle basic formatting from Gemini response
+// Simple Helper to handle basic formatting from Gemini response
 function formatOcrMarkdown(text) {
   return text
     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/•\s*(.*?)(?=\n|$)/g, '<div style="margin-left: 15px; margin-bottom: 5px;">• $1</div>') // Robust bullet fix
     .replace(/\n/g, '<br>');
 }
 

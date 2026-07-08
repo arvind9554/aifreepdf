@@ -66,7 +66,7 @@ function formatSummaryMarkdown(text) {
   return text
     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.*?)\*/g, '<em>$1</em>')
-    .replace(/• (.*?)/g, '<li>$1</li>') // Clean list rendering if needed
+    .replace(/•\s*(.*?)(?=\n|$)/g, '<div style="margin-left: 15px; margin-bottom: 5px;">• $1</div>') // Robust bullet fix
     .replace(/\n/g, '<br>');
 }
 

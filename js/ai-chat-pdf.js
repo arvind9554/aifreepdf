@@ -127,12 +127,13 @@ async function sendChatMessage() {
 }
 
 // Simple Helper to handle Markdown styles from Gemini
-function formatMarkdown(text) {
+// Simple Helper to handle chat formatting from Gemini response
+function formatChatMarkdown(text) {
   return text
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold formatting
-    .replace(/\*(.*?)\*/g, '<em>$1</em>')             // Italic formatting
-    .replace(/`([^`]+)`/g, '<code>$1</code>')         // Inline Code block
-    .replace(/\n/g, '<br>');                         // New lines
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/•\s*(.*?)(?=\n|$)/g, '<div style="margin-left: 15px; margin-bottom: 5px;">• $1</div>') // Robust bullet fix
+    .replace(/\n/g, '<br>');
 }
 
 function addChatBubble(text, type, id) {
