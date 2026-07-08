@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap:https://aifreepdf.vercel.app/sitemap.xml
+Sitemap: https://aifreepdf.vercel.app/sitemap.xml
