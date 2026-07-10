@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://aifreepdf.com/sitemap.xml
+Sitemap: https://www.aifreepdf.com/sitemap.xml
