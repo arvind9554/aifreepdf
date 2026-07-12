@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>How to Extract Text from Any Image or Scanned PDF Using AI OCR | AIFreePDF Blog</title>
+  <meta name="description" content="Learn how to extract editable text from any image or scanned PDF using AI-powered OCR. Convert photos of books, receipts, and documents into copy-paste text instantly. Free, no signup, 100% private."/>
+  <meta name="keywords" content="ocr online free, image to text, extract text from image, scanned pdf to text, photo to text converter, ai ocr, textlens ocr, pdf ocr online"/>
+  <meta name="robots" content="index, follow"/>
+  <meta name="author" content="AIFreePDF"/>
+  <link rel="canonical" href="https://aifreepdf.vercel.app/blog/how-to-extract-text-from-image-using-ai-ocr.html"/>
+
+  <meta property="og:type" content="article"/>
+  <meta property="og:url" content="https://aifreepdf.vercel.app/blog/how-to-extract-text-from-image-using-ai-ocr.html"/>
+  <meta property="og:title" content="How to Extract Text from Any Image or Scanned PDF Using AI OCR"/>
+  <meta property="og:description" content="Convert any image or scanned PDF into editable text instantly using AI OCR. Free, no signup, 100% private."/>
+  <meta property="og:image" content="https://aifreepdf.vercel.app/favicon.png"/>
+  <meta property="og:site_name" content="AIFreePDF"/>
+  <meta property="article:published_time" content="2026-07-12"/>
+  <meta property="article:author" content="AIFreePDF Team"/>
+
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="How to Extract Text from Any Image Using AI OCR – AIFreePDF"/>
+  <meta name="twitter:description" content="Convert any image or scanned PDF into editable text instantly. Free AI OCR, no signup required."/>
+  <meta name="twitter:image" content="https://aifreepdf.vercel.app/favicon.png"/>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "How to Extract Text from Any Image or Scanned PDF Using AI OCR",
+    "description": "Learn how to extract editable text from any image or scanned PDF using AI-powered OCR. Free, no signup, 100% private.",
+    "url": "https://aifreepdf.vercel.app/blog/how-to-extract-text-from-image-using-ai-ocr.html",
+    "datePublished": "2026-07-12",
+    "dateModified": "2026-07-12",
+    "author": { "@type": "Organization", "name": "AIFreePDF" },
+    "publisher": { "@type": "Organization", "name": "AIFreePDF", "url": "https://aifreepdf.vercel.app" },
+    "image": "https://aifreepdf.vercel.app/favicon.png",
+    "mainEntityOfPage": "https://aifreepdf.vercel.app/blog/how-to-extract-text-from-image-using-ai-ocr.html"
+  }
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4LRDE0PHS7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4LRDE0PHS7');
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" href="../favicon.png" type="image/png" sizes="48x48">
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    .blog-post-hero {
+      padding: 120px 0 48px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .blog-post-hero .blog-cat {
+      display: inline-block;
+      padding: 4px 14px;
+      background: rgba(245,158,11,0.12);
+      border: 1px solid rgba(245,158,11,0.25);
+      border-radius: 100px;
+      font-size: .75rem; font-weight: 700;
+      color: #fbbf24; letter-spacing: .06em;
+      text-transform: uppercase; margin-bottom: 18px;
+    }
+    .blog-post-hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800; letter-spacing: -.02em;
+      max-width: 820px; margin: 0 auto 18px;
+      line-height: 1.15;
+    }
+    .blog-post-hero .blog-meta {
+      font-size: .85rem; color: var(--text3);
+      display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;
+    }
+    .blog-meta-dot { color: var(--border2); }
+    .blog-article {
+      max-width: 760px; margin: 0 auto;
+      padding: 56px 24px 100px;
+    }
+    .blog-article p { font-size: 1.05rem; color: var(--text2); line-height: 1.8; margin-bottom: 20px; }
+    .blog-article h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.55rem; font-weight: 700;
+      color: var(--text); margin: 44px 0 16px;
+      letter-spacing: -.01em;
+    }
+    .blog-article h3 { font-size: 1.15rem; font-weight: 700; color: var(--text); margin: 32px 0 12px; }
+    .blog-article ul, .blog-article ol {
+      padding-left: 24px; margin-bottom: 20px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .blog-article li { font-size: 1rem; color: var(--text2); line-height: 1.7; }
+    .blog-article li strong { color: var(--text); }
+    .blog-article strong { color: var(--text); font-weight: 600; }
+    .blog-img-wrap { margin: 32px 0; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
+    .blog-img-inner {
+      width: 100%; background: var(--surface);
+      min-height: 200px;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 12px; padding: 36px 24px;
+    }
+    .blog-img-caption {
+      font-size: .82rem; color: var(--text3);
+      padding: 10px 16px; background: var(--surface2);
+      border-top: 1px solid var(--border);
+      text-align: center; font-style: italic;
+    }
+    .blog-highlight {
+      background: rgba(245,158,11,0.06);
+      border-left: 3px solid #f59e0b;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 18px 20px; margin: 28px 0;
+    }
+    .blog-highlight.green {
+      background: rgba(16,185,129,0.06);
+      border-left-color: #10b981;
+    }
+    .blog-highlight p { margin: 0; color: var(--text2); font-size: .95rem; }
+    .blog-cta {
+      background: linear-gradient(135deg, rgba(245,158,11,0.08), rgba(239,68,68,0.04));
+      border: 1px solid rgba(245,158,11,0.2);
+      border-radius: var(--radius); padding: 32px; margin: 44px 0; text-align: center;
+    }
+    .blog-cta h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; font-weight: 700; margin: 0 0 10px; }
+    .blog-cta p { margin: 0 0 20px; color: var(--text2); font-size: .95rem; }
+    .blog-cta .btn-primary { display: inline-flex; width: auto; padding: 12px 28px; }
+    .step-box {
+      display: flex; gap: 16px; align-items: flex-start;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 18px 20px; margin-bottom: 12px;
+    }
+    .step-box-num {
+      width: 32px; height: 32px; flex-shrink: 0;
+      background: #f59e0b; color: #000;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: .85rem;
+    }
+    .step-box-text strong { display: block; color: var(--text); font-size: .95rem; margin-bottom: 3px; }
+    .step-box-text span { font-size: .875rem; color: var(--text3); }
+    .blog-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+    .blog-tag-item { padding: 4px 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 100px; font-size: .78rem; color: var(--text3); }
+    .blog-related { margin-top: 48px; padding-top: 40px; border-top: 1px solid var(--border); }
+    .blog-related h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 20px; }
+    .usecase-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin: 24px 0; }
+    .usecase-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 18px 16px; }
+    .usecase-card .uc-icon { font-size: 1.6rem; margin-bottom: 8px; }
+    .usecase-card .uc-title { font-size: .9rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .usecase-card .uc-desc { font-size: .78rem; color: var(--text3); line-height: 1.5; }
+    .ocr-demo {
+      background: linear-gradient(145deg, #0e0b1f, #1a0f0a);
+      border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 14px; padding: 20px;
+    }
+    .format-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 12px; margin: 20px 0;
+    }
+    .format-card {
+      background: rgba(245,158,11,0.05);
+      border: 1px solid rgba(245,158,11,0.18);
+      border-radius: var(--radius-sm); padding: 14px; text-align: center;
+    }
+    .format-card .fmt-icon { font-size: 1.6rem; margin-bottom: 6px; }
+    .format-card .fmt-name { font-size: .82rem; font-weight: 700; color: #fbbf24; }
+    .format-card .fmt-desc { font-size: .72rem; color: var(--text3); margin-top: 3px; }
+    @media (max-width: 600px) {
+      .blog-post-hero { padding: 90px 0 32px; }
+      .blog-article { padding: 36px 16px 80px; }
+      .blog-article h2 { font-size: 1.35rem; margin: 32px 0 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="../index.html" class="logo">AIFree<span>PDF</span></a>
+    <div class="nav-links">
+      <a href="../index.html#tools">Tools</a>
+      <a href="../index.html#how">How it Works</a>
+      <a href="../index.html#faq">FAQ</a>
+      <a href="../blog.html">Blog</a>
+    </div>
+    <div class="nav-right">
+      <button class="nav-cta" onclick="window.location.href='../ai-ocr.html'">Try Free</button>
+      <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-drawer" id="mobile-drawer">
+    <a href="../index.html#tools" onclick="closeMobileMenu()">Tools</a>
+    <a href="../index.html#how" onclick="closeMobileMenu()">How it Works</a>
+    <a href="../index.html#faq" onclick="closeMobileMenu()">FAQ</a>
+    <a href="../blog.html" onclick="closeMobileMenu()">Blog</a>
+    <button class="nav-cta mobile-cta" onclick="closeMobileMenu();window.location.href='../ai-ocr.html'">Try Free</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="blog-post-hero">
+  <div class="container">
+    <span class="blog-cat">🔎 AI OCR Guide</span>
+    <h1>How to Extract Text from Any Image or Scanned PDF Using AI OCR</h1>
+    <div class="blog-meta">
+      <span>✍️ AIFreePDF Team</span>
+      <span class="blog-meta-dot">·</span>
+      <span>📅 July 12, 2026</span>
+      <span class="blog-meta-dot">·</span>
+      <span>⏱ 5 min read</span>
+      <span class="blog-meta-dot">·</span>
+      <span>🔎 OCR</span>
+    </div>
+  </div>
+</div>
+
+<!-- ARTICLE -->
+<article class="blog-article">
+
+  <p>
+    You've taken a photo of a textbook page but can't copy the text. You received a scanned PDF of a contract but can't select a single word. You have a photo of a receipt but have to retype every line manually. These are problems that millions of people face every day — and they all have one solution: <strong>OCR (Optical Character Recognition).</strong>
+  </p>
+  <p>
+    With AIFreePDF's <strong>TextLens™ OCR</strong>, you can convert any image or scanned document into fully editable, copy-paste text in seconds — powered by AI, entirely in your browser, with zero uploads to any server.
+  </p>
+
+  <!-- Visual 1: Before/After OCR demo -->
+  <div class="blog-img-wrap">
+    <div class="blog-img-inner" style="background:linear-gradient(135deg,#0f172a,#1a0f0a)">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;width:100%;max-width:560px">
+        <div style="background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.2);border-radius:12px;padding:20px;text-align:center">
+          <div style="font-size:2rem;margin-bottom:10px">📷</div>
+          <div style="font-size:.85rem;font-weight:700;color:#f87171;margin-bottom:8px">Scanned Image / Photo</div>
+          <div style="font-size:.75rem;color:#64748b;line-height:1.6;font-style:italic">"The text is there but you can't select, copy, or edit it"</div>
+        </div>
+        <div style="background:rgba(16,185,129,0.07);border:1px solid rgba(16,185,129,0.2);border-radius:12px;padding:20px;text-align:center">
+          <div style="font-size:2rem;margin-bottom:10px">📝</div>
+          <div style="font-size:.85rem;font-weight:700;color:#34d399;margin-bottom:8px">Editable Text Output</div>
+          <div style="font-size:.75rem;color:#64748b;line-height:1.6;font-style:italic">"Now you can copy, paste, edit, translate, or search the text freely"</div>
+        </div>
+      </div>
+    </div>
+    <div class="blog-img-caption">TextLens™ OCR converts locked image text into fully editable content — in seconds, right in your browser.</div>
+  </div>
+
+  <h2>What is OCR and Why Do You Need It?</h2>
+  <p>
+    OCR stands for <strong>Optical Character Recognition</strong> — a technology that reads the characters in an image and converts them into machine-readable text. When you take a photo of a document, the result is just a picture. OCR makes that picture "smart" by recognizing and extracting every letter, word, and sentence in it.
+  </p>
+  <p>
+    Before OCR, the only option was to retype everything manually — a slow, error-prone process. With AI-powered OCR like TextLens™, the entire conversion happens in seconds with high accuracy.
+  </p>
+
+  <div class="blog-highlight">
+    <p>💡 <strong>Simple explanation:</strong> A regular photo of a document is like a painting of a book — you can look at the words but can't interact with them. OCR turns that painting back into an actual book — where the words are real, selectable, and editable.</p>
+  </div>
+
+  <h2>What Files Does TextLens™ OCR Support?</h2>
+  <p>TextLens™ accepts all common image formats as well as scanned PDFs:</p>
+
+  <div class="format-grid">
+    <div class="format-card">
+      <div class="fmt-icon">🖼️</div>
+      <div class="fmt-name">JPG / JPEG</div>
+      <div class="fmt-desc">Photos, camera scans</div>
+    </div>
+    <div class="format-card">
+      <div class="fmt-icon">🖼️</div>
+      <div class="fmt-name">PNG</div>
+      <div class="fmt-desc">Screenshots, graphics</div>
+    </div>
+    <div class="format-card">
+      <div class="fmt-icon">🖼️</div>
+      <div class="fmt-name">WEBP</div>
+      <div class="fmt-desc">Modern web images</div>
+    </div>
+    <div class="format-card">
+      <div class="fmt-icon">🖼️</div>
+      <div class="fmt-name">BMP</div>
+      <div class="fmt-desc">Bitmap images</div>
+    </div>
+    <div class="format-card">
+      <div class="fmt-icon">📄</div>
+      <div class="fmt-name">Scanned PDF</div>
+      <div class="fmt-desc">Page 1 extracted & read</div>
+    </div>
+  </div>
+
+  <h2>Top Real-World Use Cases for OCR</h2>
+
+  <div class="usecase-grid">
+    <div class="usecase-card">
+      <div class="uc-icon">📚</div>
+      <div class="uc-title">Students</div>
+      <div class="uc-desc">Photograph a textbook page and get copy-paste text for notes, assignments, or research in seconds.</div>
+    </div>
+    <div class="usecase-card">
+      <div class="uc-icon">🧾</div>
+      <div class="uc-title">Receipts & Bills</div>
+      <div class="uc-desc">Extract itemized data from receipts, utility bills, or invoices without typing a single word.</div>
+    </div>
+    <div class="usecase-card">
+      <div class="uc-icon">📜</div>
+      <div class="uc-title">Scanned Documents</div>
+      <div class="uc-desc">Make old scanned contracts, certificates, or letters searchable and editable again.</div>
+    </div>
+    <div class="usecase-card">
+      <div class="uc-icon">🪪</div>
+      <div class="uc-title">ID & Forms</div>
+      <div class="uc-desc">Extract name, date, ID number, and address from official documents for digital records.</div>
+    </div>
+    <div class="usecase-card">
+      <div class="uc-icon">📰</div>
+      <div class="uc-title">Articles & Clippings</div>
+      <div class="uc-desc">Convert newspaper clippings or magazine photos into searchable, shareable text.</div>
+    </div>
+    <div class="usecase-card">
+      <div class="uc-icon">✍️</div>
+      <div class="uc-title">Handwritten Notes</div>
+      <div class="uc-desc">Convert clearly written handwritten notes into digital text (works best with neat handwriting).</div>
+    </div>
+  </div>
+
+  <!-- Visual 2: OCR process -->
+  <div class="blog-img-wrap">
+    <div class="blog-img-inner" style="background:var(--surface)">
+      <div style="width:100%;max-width:540px">
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center">
+          <div style="text-align:center;padding:16px 12px;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:12px;min-width:100px">
+            <div style="font-size:1.5rem;margin-bottom:6px">📷</div>
+            <div style="font-size:.72rem;font-weight:600;color:#fbbf24">Upload Image</div>
+          </div>
+          <div style="color:#f59e0b">→</div>
+          <div style="text-align:center;padding:16px 12px;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:12px;min-width:100px">
+            <div style="font-size:1.5rem;margin-bottom:6px">🔎</div>
+            <div style="font-size:.72rem;font-weight:600;color:#fbbf24">AI Reads Text</div>
+          </div>
+          <div style="color:#f59e0b">→</div>
+          <div style="text-align:center;padding:16px 12px;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:12px;min-width:100px">
+            <div style="font-size:1.5rem;margin-bottom:6px">✨</div>
+            <div style="font-size:.72rem;font-weight:600;color:#fbbf24">AI Polishes</div>
+          </div>
+          <div style="color:#f59e0b">→</div>
+          <div style="text-align:center;padding:16px 12px;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:12px;min-width:100px">
+            <div style="font-size:1.5rem;margin-bottom:6px">📋</div>
+            <div style="font-size:.72rem;font-weight:600;color:#34d399">Copy & Use</div>
+          </div>
+        </div>
+        <div style="margin-top:16px;text-align:center;font-size:.78rem;color:var(--text3)">TextLens™ runs OCR first, then AI polishes the output for clean, professional text — automatically.</div>
+      </div>
+    </div>
+    <div class="blog-img-caption">TextLens™ uses a two-step approach: Tesseract.js OCR extracts the text, then AI cleans and formats it for maximum accuracy.</div>
+  </div>
+
+  <h2>How to Extract Text from an Image — Step by Step</h2>
+  <p>
+    Using <strong>TextLens™ OCR</strong> on AIFreePDF, the whole process takes under 30 seconds. Everything runs in your browser — your image is never sent to any server.
+  </p>
+
+  <div class="step-box">
+    <div class="step-box-num">1</div>
+    <div class="step-box-text">
+      <strong>Open TextLens™ OCR</strong>
+      <span>Go to <a href="../ai-ocr.html" style="color:#fbbf24">aifreepdf.vercel.app/ai-ocr.html</a> in any browser. Works on desktop and mobile — no app needed.</span>
+    </div>
+  </div>
+
+  <div class="step-box">
+    <div class="step-box-num">2</div>
+    <div class="step-box-text">
+      <strong>Upload your image or scanned PDF</strong>
+      <span>Drag & drop your file or click to browse. Supported formats: JPG, PNG, WEBP, BMP, and scanned PDF.</span>
+    </div>
+  </div>
+
+  <div class="step-box">
+    <div class="step-box-num">3</div>
+    <div class="step-box-text">
+      <strong>Select the text language</strong>
+      <span>Choose English, Hindi, or English + Hindi. Selecting the correct language significantly improves OCR accuracy.</span>
+    </div>
+  </div>
+
+  <div class="step-box">
+    <div class="step-box-num">4</div>
+    <div class="step-box-text">
+      <strong>Click "Extract Text with AI"</strong>
+      <span>The OCR engine scans your image and extracts all text. A progress bar shows the recognition process in real time. On first use, the OCR model downloads (~10MB) — subsequent uses are instant.</span>
+    </div>
+  </div>
+
+  <div class="step-box">
+    <div class="step-box-num">5</div>
+    <div class="step-box-text">
+      <strong>Copy or download your text</strong>
+      <span>The extracted and AI-polished text appears in an editable box. Click "Copy All Text" to copy, or "Download .txt" to save it as a text file. You can also edit the text directly before copying.</span>
+    </div>
+  </div>
+
+  <div class="blog-highlight green">
+    <p>✅ <strong>Two-step AI process:</strong> TextLens™ first uses Tesseract.js OCR to extract the raw text from your image, then an AI model automatically cleans up formatting errors, corrects obvious typos, and structures the output professionally — giving you cleaner results than basic OCR alone.</p>
+  </div>
+
+  <h2>Tips for Getting the Best OCR Results</h2>
+
+  <h3>📸 Use the highest quality image you have</h3>
+  <p>
+    OCR accuracy depends heavily on image quality. A clear, well-lit photo of a document at close range will give near-perfect results. A blurry, dark, or low-resolution photo will produce more errors. If possible, scan your document rather than photographing it — scans are typically cleaner and more uniform.
+  </p>
+
+  <h3>📐 Keep the document flat and straight</h3>
+  <p>
+    Curved pages (like an open book photographed from the side), tilted documents, or heavily shadowed scans reduce OCR accuracy. Lay the document flat on a surface and shoot directly above it for best results.
+  </p>
+
+  <h3>🌐 Select the correct language</h3>
+  <p>
+    If your document is in English, select "English." If it's in Hindi, select "Hindi." For bilingual documents — like government forms that mix English headings with Hindi content — select "English + Hindi." The right language model dramatically improves character recognition accuracy.
+  </p>
+
+  <h3>✏️ Edit after extraction</h3>
+  <p>
+    Even with AI polishing, some characters may be misread (especially if the original image has stains, watermarks, or unusual fonts). The output text box is fully editable — review and correct the text before copying or downloading.
+  </p>
+
+  <!-- Visual 3: Quality comparison -->
+  <div class="blog-img-wrap">
+    <div class="blog-img-inner" style="background:linear-gradient(135deg,#0a0918,#1a0f0a)">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%;max-width:540px">
+        <div style="background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.2);border-radius:10px;padding:16px">
+          <div style="font-size:.72rem;font-weight:700;color:#f87171;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">❌ Poor Image Quality</div>
+          <ul style="padding-left:14px;margin:0;display:flex;flex-direction:column;gap:6px">
+            <li style="font-size:.75rem;color:var(--text3)">Blurry or out-of-focus</li>
+            <li style="font-size:.75rem;color:var(--text3)">Dark or uneven lighting</li>
+            <li style="font-size:.75rem;color:var(--text3)">Page curved or tilted</li>
+            <li style="font-size:.75rem;color:var(--text3)">Heavy shadows or glare</li>
+            <li style="font-size:.75rem;color:var(--text3)">Very small font size</li>
+          </ul>
+        </div>
+        <div style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.2);border-radius:10px;padding:16px">
+          <div style="font-size:.72rem;font-weight:700;color:#34d399;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">✅ Best Image Quality</div>
+          <ul style="padding-left:14px;margin:0;display:flex;flex-direction:column;gap:6px">
+            <li style="font-size:.75rem;color:var(--text3)">Sharp and in focus</li>
+            <li style="font-size:.75rem;color:var(--text3)">Even, bright lighting</li>
+            <li style="font-size:.75rem;color:var(--text3)">Document flat & straight</li>
+            <li style="font-size:.75rem;color:var(--text3)">No shadows or reflections</li>
+            <li style="font-size:.75rem;color:var(--text3)">Clear, readable font</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="blog-img-caption">Image quality directly impacts OCR accuracy. Better photos → better text extraction. Always shoot in good lighting with the document flat.</div>
+  </div>
+
+  <h2>TextLens™ OCR vs. Other Online OCR Tools</h2>
+  <p>
+    Most free online OCR tools require you to upload your image to their server, which creates a privacy risk — especially for sensitive documents like ID cards, bank statements, or medical records. TextLens™ works completely differently:
+  </p>
+  <ul>
+    <li><strong>100% browser-based</strong> — Your image never leaves your device. OCR runs entirely in your browser using Tesseract.js, a powerful open-source OCR engine.</li>
+    <li><strong>AI-enhanced output</strong> — After basic OCR, an AI model automatically cleans and formats the text — reducing errors and improving readability.</li>
+    <li><strong>No file limits</strong> — Process as many images as you need without daily limits or size restrictions.</li>
+    <li><strong>Fully editable output</strong> — The extracted text box is live-editable, so you can fix any errors before copying.</li>
+    <li><strong>Download as .txt</strong> — Save the extracted text directly as a plain text file with one click.</li>
+  </ul>
+
+  <!-- CTA -->
+  <div class="blog-cta">
+    <h3>🔎 Ready to Extract Text from Your Image?</h3>
+    <p>Free, instant, and 100% private. No software, no account, no image upload to any server.</p>
+    <a href="../ai-ocr.html">
+      <button class="btn-primary" style="background:linear-gradient(135deg,#f59e0b,#b45309)">🔎 Try TextLens™ OCR Free →</button>
+    </a>
+    <p style="margin:12px 0 0;font-size:.78rem;color:var(--text3)">JPG · PNG · WEBP · Scanned PDF · English & Hindi · No upload · AI-enhanced</p>
+  </div>
+
+  <h2>Frequently Asked Questions</h2>
+
+  <h3>Does TextLens™ work with handwritten text?</h3>
+  <p>TextLens™ can read clearly printed handwriting but struggles with messy or cursive handwriting. For best results with handwritten notes, ensure the writing is neat, dark, and on a clean white background. Printed text always gives the most accurate results.</p>
+
+  <h3>What languages does TextLens™ support?</h3>
+  <p>Currently, TextLens™ supports English and Hindi (including combined documents with both languages). Additional language support may be added in the future. For documents in other languages, English mode will still attempt to recognize Latin-script characters.</p>
+
+  <h3>Why does the first OCR take longer?</h3>
+  <p>On the first use, TextLens™ downloads the OCR language model (~10MB) from a CDN. This is a one-time download per browser session. After the first scan, all subsequent images process instantly since the model is already loaded in memory.</p>
+
+  <h3>Is my image private when using TextLens™?</h3>
+  <p>Completely. Your image file never leaves your browser. The OCR engine (Tesseract.js) runs entirely on your device. Only the extracted text is sent to the AI for polishing — the image itself is never transmitted anywhere.</p>
+
+  <h3>Can I use it for scanned PDFs?</h3>
+  <p>Yes — TextLens™ renders the first page of a scanned PDF as an image and runs OCR on it. For multi-page scanned PDFs, convert each page to an image first using the <a href="../pdf-to-jpg.html" style="color:#fbbf24">PDF to Images</a> tool, then process each page individually.</p>
+
+  <h3>Can I edit the extracted text before copying?</h3>
+  <p>Yes — the output text box is fully editable. Click anywhere in the text to make corrections before copying or downloading. This lets you fix any OCR errors without opening a separate text editor.</p>
+
+  <!-- Tags -->
+  <div class="blog-tags">
+    <span class="blog-tag-item">ocr online free</span>
+    <span class="blog-tag-item">image to text</span>
+    <span class="blog-tag-item">extract text from image</span>
+    <span class="blog-tag-item">scanned pdf to text</span>
+    <span class="blog-tag-item">ai ocr</span>
+    <span class="blog-tag-item">textlens ocr</span>
+    <span class="blog-tag-item">photo to text</span>
+    <span class="blog-tag-item">free ai tools</span>
+  </div>
+
+  <!-- Related -->
+  <div class="blog-related">
+    <h3>More from AIFreePDF</h3>
+    <div style="display:flex;flex-wrap:wrap;gap:12px">
+      <a href="how-to-chat-with-pdf-using-ai.html" style="text-decoration:none">
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 18px;font-size:.875rem;font-weight:600;color:var(--text2);transition:all .2s" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+          💬 Chat with Your PDF Using AI →
+        </div>
+      </a>
+      <a href="compress-pdf-without-losing-quality.html" style="text-decoration:none">
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 18px;font-size:.875rem;font-weight:600;color:var(--text2);transition:all .2s" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+          📦 Compress PDF Without Losing Quality →
+        </div>
+      </a>
+      <a href="convert-jpg-images-to-pdf-online-without-software.html" style="text-decoration:none">
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 18px;font-size:.875rem;font-weight:600;color:var(--text2);transition:all .2s" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+          🖼️ Convert JPG Images to PDF →
+        </div>
+      </a>
+      <a href="../blog.html" style="text-decoration:none">
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 18px;font-size:.875rem;font-weight:600;color:#fbbf24;transition:all .2s" onmouseover="this.style.borderColor='#f59e0b'" onmouseout="this.style.borderColor='var(--border)'">
+          ← All Blog Posts
+        </div>
+      </a>
+    </div>
+  </div>
+
+</article>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="../index.html" class="logo">AIFree<span>PDF</span></a>
+        <p>Professional PDF tools. Free forever. Private by design.</p>
+      </div>
+      <div class="footer-links">
+        <span>PDF Compressor</span>
+        <span>Image to PDF</span>
+        <span>Merge PDF</span>
+        <span>Split PDF</span>
+        <span>DocuTalk™ Chat</span>
+        <span>TextLens™ OCR</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 AIFreePDF · All processing happens in your browser · No data collected</p>
+      <p class="dev-credit">Developed by <span>Arvind Kumar Pandey</span></p>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+function toggleMobileMenu(){var d=document.getElementById('mobile-drawer'),b=document.getElementById('hamburger');if(!d||!b)return;d.classList.toggle('open');b.classList.toggle('open');}
+function closeMobileMenu(){document.getElementById('mobile-drawer')?.classList.remove('open');document.getElementById('hamburger')?.classList.remove('open');}
+document.addEventListener('click',function(e){var d=document.getElementById('mobile-drawer'),b=document.getElementById('hamburger');if(!d||!b)return;if(!d.contains(e.target)&&!b.contains(e.target)){d.classList.remove('open');b.classList.remove('open');}});
+</script>
+</body>
+</html>
