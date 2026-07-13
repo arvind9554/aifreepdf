@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Privacy Policy | AIFreePDF – Free Online PDF Tools</title>
+  <meta name="description" content="AIFreePDF Privacy Policy — Learn how we handle your data, why your files never leave your device, and how we protect your privacy."/>
+  <meta name="robots" content="index, follow"/>
+  <meta name="author" content="AIFreePDF"/>
+  <link rel="canonical" href="https://www.aifreepdf.com/privacy-policy.html"/>
+
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://www.aifreepdf.com/privacy-policy.html"/>
+  <meta property="og:title" content="Privacy Policy – AIFreePDF"/>
+  <meta property="og:description" content="Learn how AIFreePDF handles your data and why your files never leave your device."/>
+  <meta property="og:image" content="https://www.aifreepdf.com/favicon.png"/>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4LRDE0PHS7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4LRDE0PHS7');
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" href="favicon.png" type="image/png" sizes="48x48">
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    .policy-hero {
+      padding: 120px 0 48px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .policy-hero .policy-badge {
+      display: inline-block;
+      padding: 4px 14px;
+      background: rgba(59,130,246,0.10);
+      border: 1px solid rgba(59,130,246,0.22);
+      border-radius: 100px;
+      font-size: .75rem; font-weight: 700;
+      color: var(--accent2); letter-spacing: .06em;
+      text-transform: uppercase; margin-bottom: 18px;
+    }
+    .policy-hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 800; letter-spacing: -.02em;
+      margin-bottom: 12px;
+    }
+    .policy-hero .policy-date {
+      font-size: .875rem; color: var(--text3);
+    }
+
+    /* Article */
+    .policy-article {
+      max-width: 780px; margin: 0 auto;
+      padding: 56px 24px 100px;
+    }
+
+    /* TOC */
+    .policy-toc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      margin-bottom: 44px;
+    }
+    .policy-toc h3 {
+      font-size: .82rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .08em;
+      color: var(--text3); margin-bottom: 14px;
+    }
+    .policy-toc ol {
+      padding-left: 18px;
+      display: flex; flex-direction: column; gap: 6px;
+      margin: 0;
+    }
+    .policy-toc li a {
+      font-size: .875rem; color: var(--accent2);
+      text-decoration: none;
+    }
+    .policy-toc li a:hover { text-decoration: underline; }
+
+    /* Sections */
+    .policy-article h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.35rem; font-weight: 700;
+      color: var(--text); margin: 44px 0 14px;
+      padding-top: 8px;
+      letter-spacing: -.01em;
+      border-top: 1px solid var(--border);
+    }
+    .policy-article h2:first-of-type { border-top: none; margin-top: 0; }
+    .policy-article p {
+      font-size: .975rem; color: var(--text2);
+      line-height: 1.8; margin-bottom: 16px;
+    }
+    .policy-article ul {
+      padding-left: 22px; margin-bottom: 16px;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .policy-article li {
+      font-size: .95rem; color: var(--text2); line-height: 1.7;
+    }
+    .policy-article li strong { color: var(--text); }
+    .policy-article strong { color: var(--text); font-weight: 600; }
+    .policy-article a { color: var(--accent2); text-decoration: none; }
+    .policy-article a:hover { text-decoration: underline; }
+
+    /* Highlight boxes */
+    .policy-box {
+      display: flex; gap: 14px; align-items: flex-start;
+      background: rgba(59,130,246,0.05);
+      border: 1px solid rgba(59,130,246,0.18);
+      border-radius: var(--radius-sm);
+      padding: 18px 20px; margin: 20px 0;
+    }
+    .policy-box.green {
+      background: rgba(16,185,129,0.05);
+      border-color: rgba(16,185,129,0.2);
+    }
+    .policy-box.amber {
+      background: rgba(245,158,11,0.05);
+      border-color: rgba(245,158,11,0.2);
+    }
+    .policy-box-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 1px; }
+    .policy-box-text { font-size: .9rem; color: var(--text2); line-height: 1.7; }
+    .policy-box-text strong { color: var(--text); }
+
+    /* Contact card */
+    .policy-contact {
+      background: linear-gradient(135deg, rgba(59,130,246,0.07), rgba(139,92,246,0.05));
+      border: 1px solid rgba(59,130,246,0.18);
+      border-radius: var(--radius);
+      padding: 28px; margin-top: 44px; text-align: center;
+    }
+    .policy-contact h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem; font-weight: 700; margin-bottom: 8px;
+    }
+    .policy-contact p { font-size: .9rem; color: var(--text2); margin-bottom: 14px; }
+    .policy-contact a {
+      display: inline-block;
+      padding: 10px 24px;
+      background: var(--accent); color: #fff;
+      border-radius: var(--radius-sm); font-weight: 600; font-size: .875rem;
+      text-decoration: none; transition: background .2s;
+    }
+    .policy-contact a:hover { background: #2563eb; }
+
+    @media (max-width: 600px) {
+      .policy-hero { padding: 90px 0 32px; }
+      .policy-article { padding: 36px 16px 80px; }
+      .policy-article h2 { font-size: 1.15rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">AIFree<span>PDF</span></a>
+    <div class="nav-links">
+      <a href="index.html#tools">Tools</a>
+      <a href="index.html#how">How it Works</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="blog.html">Blog</a>
+    </div>
+    <div class="nav-right">
+      <button class="nav-cta" onclick="window.location.href='index.html#tools'">Get Started</button>
+      <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-drawer" id="mobile-drawer">
+    <a href="index.html#tools" onclick="closeMobileMenu()">Tools</a>
+    <a href="index.html#how" onclick="closeMobileMenu()">How it Works</a>
+    <a href="index.html#faq" onclick="closeMobileMenu()">FAQ</a>
+    <a href="blog.html" onclick="closeMobileMenu()">Blog</a>
+    <button class="nav-cta mobile-cta" onclick="closeMobileMenu();window.location.href='index.html#tools'">Get Started</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="policy-hero">
+  <div class="container">
+    <span class="policy-badge">🔒 Legal</span>
+    <h1>Privacy Policy</h1>
+    <p class="policy-date">Last updated: July 13, 2026 &nbsp;·&nbsp; Effective immediately</p>
+  </div>
+</div>
+
+<!-- ARTICLE -->
+<div class="policy-article container">
+
+  <div class="policy-box green">
+    <span class="policy-box-icon">✅</span>
+    <div class="policy-box-text">
+      <strong>Short version:</strong> AIFreePDF is a 100% browser-based tool. Your files never leave your device. We don't collect, store, or see any of your documents. We use Google Analytics only for anonymous page visit tracking.
+    </div>
+  </div>
+
+  <!-- Table of Contents -->
+  <div class="policy-toc">
+    <h3>Contents</h3>
+    <ol>
+      <li><a href="#section-1">Who We Are</a></li>
+      <li><a href="#section-2">What Data We Collect</a></li>
+      <li><a href="#section-3">Your Files — How They Are Processed</a></li>
+      <li><a href="#section-4">AI Tools — Data Handling</a></li>
+      <li><a href="#section-5">Google Analytics</a></li>
+      <li><a href="#section-6">Cookies</a></li>
+      <li><a href="#section-7">Third-Party Services</a></li>
+      <li><a href="#section-8">Children's Privacy</a></li>
+      <li><a href="#section-9">Your Rights</a></li>
+      <li><a href="#section-10">Changes to This Policy</a></li>
+      <li><a href="#section-11">Contact Us</a></li>
+    </ol>
+  </div>
+
+  <!-- 1 -->
+  <h2 id="section-1">1. Who We Are</h2>
+  <p>
+    AIFreePDF (<strong>www.aifreepdf.com</strong>) is a free, browser-based PDF and image processing platform developed by <strong>Arvind Kumar Pandey</strong>. Our tools include PDF compression, merging, splitting, rotating, image conversion, AI-powered summarization, AI chat with PDF, and OCR text extraction.
+  </p>
+  <p>
+    AIFreePDF is committed to building tools that respect user privacy by design. Our core principle: <strong>your documents are yours — we never want to see them, store them, or profit from them.</strong>
+  </p>
+
+  <!-- 2 -->
+  <h2 id="section-2">2. What Data We Collect</h2>
+  <p>We collect the minimum amount of data necessary to operate the service:</p>
+  <ul>
+    <li><strong>We do NOT collect:</strong> Your PDF files, images, or any document content processed by our standard tools.</li>
+    <li><strong>We do NOT collect:</strong> Your name, email address, phone number, or any personal identifying information.</li>
+    <li><strong>We do NOT collect:</strong> Payment information (AIFreePDF is completely free).</li>
+    <li><strong>We DO collect (anonymously):</strong> Page visit data via Google Analytics — which pages you visited, approximate geographic region (country/city level), browser type, and device type. This data is aggregated and anonymized.</li>
+  </ul>
+
+  <div class="policy-box">
+    <span class="policy-box-icon">📊</span>
+    <div class="policy-box-text">
+      <strong>Analytics data is anonymous.</strong> Google Analytics does not identify you personally. We use it only to understand which tools are most used and how to improve the website.
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <h2 id="section-3">3. Your Files — How They Are Processed</h2>
+  <p>
+    <strong>All standard PDF tools on AIFreePDF are 100% browser-based.</strong> This means:
+  </p>
+  <ul>
+    <li>When you upload a PDF or image, it is loaded directly into your browser's memory.</li>
+    <li>All processing (compression, merging, splitting, rotation, conversion) happens on your device using JavaScript.</li>
+    <li>Your file is <strong>never uploaded to any server, cloud, or third-party system.</strong></li>
+    <li>When you close the tab or refresh the page, all file data is immediately cleared from memory.</li>
+    <li>We have no technical capability to access, view, or store your documents — even if we wanted to.</li>
+  </ul>
+
+  <div class="policy-box green">
+    <span class="policy-box-icon">🔒</span>
+    <div class="policy-box-text">
+      <strong>Verification:</strong> You can verify this yourself — open browser DevTools (F12) → Network tab → upload and process a file. You will see zero outbound file uploads. All network activity is limited to loading the page itself.
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <h2 id="section-4">4. AI Tools — Data Handling</h2>
+  <p>
+    AIFreePDF offers three AI-powered tools: <strong>SwiftMind™ PDF Summarizer</strong>, <strong>DocuTalk™ Chat with PDF</strong>, and <strong>TextLens™ OCR</strong>. These tools involve sending data to an external AI API. Here is exactly how each handles your data:
+  </p>
+
+  <h3 style="margin:20px 0 10px;font-size:1rem;font-weight:700;color:var(--text)">SwiftMind™ PDF Summarizer &amp; DocuTalk™ Chat</h3>
+  <ul>
+    <li>Your PDF file is <strong>never transmitted</strong>. Text is extracted locally in your browser using pdf.js.</li>
+    <li>Only the <strong>extracted text content</strong> (not the file itself) is sent to the AI API (Google Gemini) for summarization or answering questions.</li>
+    <li>This text transmission happens over HTTPS (encrypted connection).</li>
+    <li>The text is used solely to generate a response and is <strong>not stored permanently</strong> by AIFreePDF.</li>
+    <li>Google Gemini's own privacy policy applies to data sent to their API. See: <a href="https://policies.google.com/privacy" target="_blank">policies.google.com/privacy</a></li>
+  </ul>
+
+  <h3 style="margin:20px 0 10px;font-size:1rem;font-weight:700;color:var(--text)">TextLens™ OCR</h3>
+  <ul>
+    <li>OCR processing uses <strong>Tesseract.js</strong> — a fully browser-based OCR engine. Your image is processed entirely on your device.</li>
+    <li>Only the <strong>extracted raw text</strong> (not your image) is optionally sent to the AI API for formatting and cleanup.</li>
+    <li>Your image file is never transmitted to any server.</li>
+  </ul>
+
+  <div class="policy-box amber">
+    <span class="policy-box-icon">⚠️</span>
+    <div class="policy-box-text">
+      <strong>Recommendation for sensitive documents:</strong> If your PDF contains highly confidential information (medical records, legal contracts, financial statements), we recommend using only the standard PDF tools (compress, merge, split, etc.) which are 100% local. Avoid sending such content through the AI tools, as the extracted text is sent to an external API.
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <h2 id="section-5">5. Google Analytics</h2>
+  <p>
+    AIFreePDF uses <strong>Google Analytics 4 (GA4)</strong> to collect anonymous usage data. This includes:
+  </p>
+  <ul>
+    <li>Pages visited and time spent on each page</li>
+    <li>Approximate geographic location (country and city — not exact address)</li>
+    <li>Browser type, operating system, and device category (mobile/desktop)</li>
+    <li>Traffic source (how you found our website)</li>
+  </ul>
+  <p>
+    This data is aggregated and does not personally identify you. It is used solely to improve AIFreePDF — understanding which tools are used most and how users navigate the site.
+  </p>
+  <p>
+    You can opt out of Google Analytics tracking by installing the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank">Google Analytics Opt-out Browser Add-on</a>.
+  </p>
+
+  <!-- 6 -->
+  <h2 id="section-6">6. Cookies</h2>
+  <p>
+    AIFreePDF does not use its own cookies. However, <strong>Google Analytics sets cookies</strong> on your browser to track sessions and distinguish unique visitors. These are analytics cookies only — they do not store any personal information or document content.
+  </p>
+  <p>
+    You can manage or delete cookies through your browser settings at any time. Disabling analytics cookies will not affect the functionality of any AIFreePDF tool.
+  </p>
+
+  <!-- 7 -->
+  <h2 id="section-7">7. Third-Party Services</h2>
+  <p>AIFreePDF uses the following third-party services:</p>
+  <ul>
+    <li><strong>Vercel</strong> — Hosting and serverless functions. Vercel serves the website files and handles API function calls. <a href="https://vercel.com/legal/privacy-policy" target="_blank">Vercel Privacy Policy →</a></li>
+    <li><strong>Google Analytics</strong> — Anonymous usage analytics. <a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy →</a></li>
+    <li><strong>Google Gemini API</strong> — AI processing for SwiftMind™ and DocuTalk™ (text only, not files). <a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy →</a></li>
+    <li><strong>Google Fonts</strong> — Typography (Inter and Space Grotesk fonts loaded from Google CDN).</li>
+    <li><strong>jsDelivr CDN</strong> — Delivery of open-source JavaScript libraries (pdf.js, pdf-lib, Tesseract.js).</li>
+    <li><strong>Cloudflare CDN</strong> — Delivery of JavaScript libraries (pdf.js worker).</li>
+  </ul>
+  <p>
+    AIFreePDF does not sell, rent, or share any user data with advertisers or data brokers. There are no advertisements on AIFreePDF.
+  </p>
+
+  <!-- 8 -->
+  <h2 id="section-8">8. Children's Privacy</h2>
+  <p>
+    AIFreePDF does not knowingly collect any personal information from children under the age of 13. Our tools are general-purpose document utilities suitable for all ages. Since we do not collect personal data from any user, there is no special risk to children.
+  </p>
+  <p>
+    If you believe a child has provided personal information through our service, please contact us and we will address it immediately.
+  </p>
+
+  <!-- 9 -->
+  <h2 id="section-9">9. Your Rights</h2>
+  <p>
+    Since AIFreePDF does not collect personal data, most data rights (access, deletion, portability) do not practically apply. However:
+  </p>
+  <ul>
+    <li><strong>Right to opt out of analytics:</strong> Use the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank">Google Analytics Opt-out Add-on</a> or disable cookies in your browser.</li>
+    <li><strong>Right to information:</strong> This privacy policy explains everything we do with data. Nothing is hidden.</li>
+    <li><strong>Right to contact us:</strong> If you have questions or concerns about data handling, contact us using the information below.</li>
+  </ul>
+  <p>
+    If you are located in the European Union (EU), your rights under the <strong>General Data Protection Regulation (GDPR)</strong> are respected. Since we don't collect personal data, GDPR requirements are satisfied by design. Similarly for users in California under <strong>CCPA</strong> — we do not sell personal data.
+  </p>
+
+  <!-- 10 -->
+  <h2 id="section-10">10. Changes to This Policy</h2>
+  <p>
+    We may update this privacy policy occasionally to reflect changes in our tools, services, or legal requirements. When we do:
+  </p>
+  <ul>
+    <li>The "Last updated" date at the top of this page will be revised.</li>
+    <li>Significant changes will be noted on the website homepage.</li>
+    <li>Continued use of AIFreePDF after changes constitutes acceptance of the updated policy.</li>
+  </ul>
+  <p>
+    We encourage you to review this page periodically. Since we don't collect your email, we cannot notify you directly of changes.
+  </p>
+
+  <!-- 11 -->
+  <h2 id="section-11">11. Contact Us</h2>
+  <p>
+    If you have questions, concerns, or requests related to this privacy policy or AIFreePDF's data practices, please contact:
+  </p>
+  <ul>
+    <li><strong>Developer:</strong> Arvind Kumar Pandey</li>
+    <li><strong>Website:</strong> <a href="https://www.aifreepdf.com">www.aifreepdf.com</a></li>
+  </ul>
+
+  <div class="policy-contact">
+    <h3>Questions about your privacy?</h3>
+    <p>We're committed to full transparency. If anything in this policy is unclear, reach out and we'll explain.</p>
+    <a href="index.html">← Back to AIFreePDF</a>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">AIFree<span>PDF</span></a>
+        <p>Professional PDF tools. Free forever. Private by design.</p>
+      </div>
+      <div class="footer-links">
+        <span>PDF Compressor</span>
+        <span>Image to PDF</span>
+        <span>Merge PDF</span>
+        <span>Split PDF</span>
+        <span>Rotate PDF</span>
+        <span>PDF to Images</span>
+        <span>Improve Image Quality</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 AIFreePDF · All processing happens in your browser · No data collected</p>
+      <p class="dev-credit">Developed by <span>Arvind Kumar Pandey</span></p>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+function toggleMobileMenu(){var d=document.getElementById('mobile-drawer'),b=document.getElementById('hamburger');if(!d||!b)return;d.classList.toggle('open');b.classList.toggle('open');}
+function closeMobileMenu(){document.getElementById('mobile-drawer')?.classList.remove('open');document.getElementById('hamburger')?.classList.remove('open');}
+document.addEventListener('click',function(e){var d=document.getElementById('mobile-drawer'),b=document.getElementById('hamburger');if(!d||!b)return;if(!d.contains(e.target)&&!b.contains(e.target)){d.classList.remove('open');b.classList.remove('open');}});
+</script>
+</body>
+</html>
