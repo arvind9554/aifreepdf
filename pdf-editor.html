@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>PDF Editor Online Free – Edit, Annotate & Sign PDFs | AIFreePDF</title>
+  <meta name="description" content="Edit PDF files online for free. Add text, images, signatures, highlights, underlines, and sticky notes to any PDF. No software, no signup, 100% private."/>
+  <meta name="keywords" content="pdf editor online free, edit pdf, add text to pdf, sign pdf online, annotate pdf, highlight pdf, pdf editor no signup"/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://aifreepdf.vercel.app/pdf-editor.html"/>
+  <meta property="og:title" content="PDF Editor Online Free – AIFreePDF"/>
+  <meta property="og:description" content="Edit PDF files online for free. Add text, images, highlights, signatures and more."/>
+  <meta property="og:image" content="https://aifreepdf.vercel.app/favicon.png"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4LRDE0PHS7"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4LRDE0PHS7');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" href="favicon.png" type="image/png"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@cantoo/pdf-lib@2.3.2/dist/pdf-lib.min.js"></script>
+  <style>
+    :root {
+      --editor-bg: #0d1117;
+      --toolbar-bg: #161b22;
+      --toolbar-border: #30363d;
+      --tool-active: #3b82f6;
+      --canvas-bg: #21262d;
+    }
+
+    body { overflow: hidden; height: 100vh; display: flex; flex-direction: column; }
+
+    /* ── EDITOR NAVBAR ── */
+    .editor-navbar {
+      height: 52px; background: var(--toolbar-bg);
+      border-bottom: 1px solid var(--toolbar-border);
+      display: flex; align-items: center;
+      padding: 0 16px; gap: 12px;
+      flex-shrink: 0; z-index: 100;
+    }
+    .editor-logo { font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.1rem; color:var(--text); text-decoration:none; }
+    .editor-logo span { color: var(--accent); }
+    .editor-title { font-size:.82rem; color:var(--text3); margin-left:4px; }
+    .editor-nav-actions { margin-left:auto; display:flex; gap:8px; }
+    .editor-nav-btn {
+      padding:6px 14px; border-radius:6px; font-size:.82rem; font-weight:600;
+      cursor:pointer; border:none; transition:all .2s;
+    }
+    .editor-nav-btn.secondary { background:var(--surface2); color:var(--text2); border:1px solid var(--toolbar-border); }
+    .editor-nav-btn.secondary:hover { border-color:var(--accent); color:var(--accent); }
+    .editor-nav-btn.primary { background:var(--accent); color:#fff; }
+    .editor-nav-btn.primary:hover { background:#2563eb; }
+    .editor-nav-btn:disabled { opacity:.4; cursor:not-allowed; }
+
+    /* ── MAIN LAYOUT ── */
+    .editor-shell {
+      display: flex; flex: 1; overflow: hidden;
+    }
+
+    /* ── LEFT TOOLBAR ── */
+    .editor-toolbar {
+      width: 56px; background: var(--toolbar-bg);
+      border-right: 1px solid var(--toolbar-border);
+      display: flex; flex-direction: column;
+      align-items: center; padding: 8px 0; gap: 2px;
+      overflow-y: auto; flex-shrink: 0;
+    }
+    .tool-group-label {
+      font-size:.58rem; color:var(--text3); text-transform:uppercase;
+      letter-spacing:.06em; margin:8px 0 2px; width:100%; text-align:center;
+    }
+    .tool-sep { width:32px; height:1px; background:var(--toolbar-border); margin:4px 0; }
+    .tool-btn {
+      width:40px; height:40px; border-radius:8px;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      cursor:pointer; background:none; border:none; color:var(--text2);
+      transition:all .2s; font-size:1.1rem; position:relative;
+      gap:1px;
+    }
+    .tool-btn span.tool-label { font-size:.48rem; color:var(--text3); line-height:1; }
+    .tool-btn:hover { background:rgba(255,255,255,0.06); color:var(--text); }
+    .tool-btn.active { background:rgba(59,130,246,0.18); color:var(--tool-active); border:1px solid rgba(59,130,246,0.3); }
+    .tool-btn[title]:hover::after {
+      content: attr(title);
+      position:absolute; left:48px; top:50%; transform:translateY(-50%);
+      background:#1f2937; color:#fff; padding:4px 8px; border-radius:6px;
+      font-size:.72rem; white-space:nowrap; z-index:200; pointer-events:none;
+      border:1px solid var(--toolbar-border);
+    }
+
+    /* ── CANVAS AREA ── */
+    .editor-canvas-area {
+      flex:1; overflow:auto; background:var(--canvas-bg);
+      display:flex; flex-direction:column; align-items:center;
+      padding:24px 16px; position:relative;
+    }
+    .page-container {
+      position:relative; display:inline-block;
+      box-shadow:0 8px 32px rgba(0,0,0,0.5);
+      margin-bottom:16px; cursor:crosshair;
+    }
+    .page-container canvas { display:block; }
+    .page-container svg.annotation-layer {
+      position:absolute; top:0; left:0; width:100%; height:100%;
+      pointer-events:none; overflow:visible;
+    }
+    .annot-text-elem {
+      position:absolute; cursor:move;
+      background:transparent; border:none; outline:none;
+      resize:none; overflow:hidden; font-family:inherit;
+      padding:2px 4px; border-radius:3px; min-width:40px; min-height:20px;
+      line-height:1.4; z-index:10;
+    }
+    .annot-text-elem:focus { border:1px dashed rgba(59,130,246,0.7); }
+    .annot-text-elem.selected { border:1px dashed rgba(59,130,246,0.7); }
+    .annot-img-elem {
+      position:absolute; cursor:move; z-index:10;
+    }
+    .annot-img-elem img { display:block; border-radius:4px; }
+    .annot-img-elem.selected img { outline:2px dashed rgba(59,130,246,0.7); }
+    .resize-handle {
+      position:absolute; width:10px; height:10px;
+      background:#3b82f6; border:1px solid #fff;
+      border-radius:2px; cursor:nwse-resize; z-index:11;
+      bottom:-5px; right:-5px;
+    }
+    .sticky-note {
+      position:absolute; z-index:10; cursor:move;
+      background:#fef08a; border:1px solid #d4b400;
+      border-radius:4px; padding:8px; min-width:120px; min-height:80px;
+      font-size:12px; color:#1a1a1a; resize:both; overflow:auto;
+      box-shadow:2px 2px 8px rgba(0,0,0,0.3);
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .sticky-close {
+      position:absolute; top:2px; right:4px;
+      background:none; border:none; cursor:pointer;
+      font-size:.75rem; color:#666; line-height:1;
+    }
+
+    /* ── RIGHT PANEL ── */
+    .editor-right {
+      width: 220px; background:var(--toolbar-bg);
+      border-left:1px solid var(--toolbar-border);
+      display:flex; flex-direction:column;
+      overflow-y:auto; flex-shrink:0;
+    }
+    .right-section { padding:14px; border-bottom:1px solid var(--toolbar-border); }
+    .right-section h4 { font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--text3); margin-bottom:10px; }
+    .prop-row { display:flex; align-items:center; gap:8px; margin-bottom:8px; }
+    .prop-label { font-size:.75rem; color:var(--text3); flex-shrink:0; min-width:52px; }
+    .prop-input {
+      flex:1; background:var(--surface2); border:1px solid var(--toolbar-border);
+      color:var(--text); border-radius:5px; padding:4px 8px;
+      font-size:.78rem; outline:none;
+    }
+    .prop-input:focus { border-color:var(--accent); }
+    .color-row { display:flex; gap:6px; flex-wrap:wrap; }
+    .color-swatch {
+      width:22px; height:22px; border-radius:4px; cursor:pointer;
+      border:2px solid transparent; transition:all .15s;
+    }
+    .color-swatch.active { border-color:#fff; transform:scale(1.15); }
+    .custom-color { width:22px; height:22px; border-radius:4px; cursor:pointer; padding:0; border:none; }
+    .page-nav { display:flex; align-items:center; gap:8px; padding:12px 14px; background:var(--toolbar-bg); border-top:1px solid var(--toolbar-border); }
+    .page-nav-btn {
+      width:28px; height:28px; border-radius:6px; border:1px solid var(--toolbar-border);
+      background:var(--surface2); color:var(--text2); cursor:pointer; font-size:.9rem;
+      display:flex; align-items:center; justify-content:center; transition:all .2s;
+    }
+    .page-nav-btn:hover { border-color:var(--accent); color:var(--accent); }
+    .page-nav-btn:disabled { opacity:.35; cursor:not-allowed; }
+    .page-info { font-size:.78rem; color:var(--text2); flex:1; text-align:center; }
+
+    /* ── UPLOAD SCREEN ── */
+    .editor-upload-screen {
+      flex:1; display:flex; align-items:center; justify-content:center;
+      flex-direction:column; gap:20px;
+    }
+    .editor-drop-zone {
+      border:2px dashed var(--toolbar-border); border-radius:16px;
+      padding:60px 48px; text-align:center; cursor:pointer;
+      transition:all .25s; background:rgba(255,255,255,0.02); max-width:480px; width:90%;
+    }
+    .editor-drop-zone:hover { border-color:var(--accent); background:rgba(59,130,246,0.04); }
+    .editor-drop-zone .dz-icon { font-size:3rem; margin-bottom:16px; }
+    .editor-drop-zone h2 { font-family:'Space Grotesk',sans-serif; font-size:1.4rem; font-weight:700; margin-bottom:8px; }
+    .editor-drop-zone p { color:var(--text3); font-size:.875rem; margin-bottom:20px; }
+
+    /* ── SIGNATURE MODAL ── */
+    .sig-modal-overlay {
+      position:fixed; inset:0; background:rgba(0,0,0,0.7);
+      display:flex; align-items:center; justify-content:center;
+      z-index:500; display:none;
+    }
+    .sig-modal-overlay.open { display:flex; }
+    .sig-modal {
+      background:var(--surface); border:1px solid var(--toolbar-border);
+      border-radius:16px; padding:24px; width:480px; max-width:95vw;
+    }
+    .sig-modal h3 { font-size:1.1rem; font-weight:700; margin-bottom:4px; }
+    .sig-modal p  { font-size:.82rem; color:var(--text3); margin-bottom:16px; }
+    .sig-tabs { display:flex; gap:8px; margin-bottom:16px; }
+    .sig-tab {
+      padding:6px 14px; border-radius:6px; font-size:.82rem; font-weight:600;
+      cursor:pointer; border:1px solid var(--toolbar-border);
+      background:var(--surface2); color:var(--text2); transition:all .2s;
+    }
+    .sig-tab.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+    #sig-canvas {
+      width:100%; height:180px; border:1px solid var(--toolbar-border);
+      border-radius:8px; cursor:crosshair; touch-action:none;
+      background:#fff;
+    }
+    .sig-type-input {
+      width:100%; padding:10px; font-size:1.5rem; font-family:'Dancing Script',cursive;
+      background:var(--surface2); border:1px solid var(--toolbar-border);
+      color:var(--text); border-radius:8px; outline:none; text-align:center;
+    }
+    .sig-color-row { display:flex; gap:8px; margin-top:8px; align-items:center; }
+    .sig-color-label { font-size:.75rem; color:var(--text3); }
+    .sig-actions { display:flex; gap:8px; margin-top:14px; }
+    .sig-btn { flex:1; padding:10px; border-radius:8px; font-size:.875rem; font-weight:600; cursor:pointer; border:none; transition:all .2s; }
+    .sig-btn.clear { background:var(--surface2); color:var(--text2); }
+    .sig-btn.apply { background:var(--accent); color:#fff; }
+    .sig-btn.apply:hover { background:#2563eb; }
+    .sig-btn.cancel { background:var(--surface2); color:var(--text2); }
+
+    /* Highlight & underline rendered on canvas SVG layer */
+    .hl-rect { fill:rgba(255,255,0,0.35); pointer-events:none; }
+    .ul-line  { stroke:#ef4444; stroke-width:2px; pointer-events:none; }
+
+    /* ── TOOLBAR TOP MINI BAR ── */
+    .editor-mini-bar {
+      background:var(--toolbar-bg); border-bottom:1px solid var(--toolbar-border);
+      padding:6px 16px; display:flex; align-items:center; gap:10px;
+      flex-shrink:0; overflow-x:auto;
+    }
+    .mini-sep { width:1px; height:20px; background:var(--toolbar-border); flex-shrink:0; }
+
+    @media(max-width:700px){
+      .editor-right { display:none; }
+      .editor-toolbar { width:44px; }
+      .tool-btn span.tool-label { display:none; }
+    }
+  </style>
+  <!-- Cursive font for signature -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Pacifico&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<!-- ── EDITOR NAVBAR ── -->
+<nav class="editor-navbar">
+  <a href="index.html" class="editor-logo">AIFree<span>PDF</span></a>
+  <span class="editor-title">✏️ PDF Editor</span>
+  <div class="editor-nav-actions">
+    <button class="editor-nav-btn secondary" onclick="editorOpenFile()">📂 Open PDF</button>
+    <button class="editor-nav-btn secondary" id="btn-undo" onclick="edUndo()" disabled title="Undo (Ctrl+Z)">↩ Undo</button>
+    <button class="editor-nav-btn primary"   id="btn-save" onclick="edSavePDF()" disabled>⬇ Save PDF</button>
+  </div>
+</nav>
+
+<!-- ── MINI FORMAT BAR ── -->
+<div class="editor-mini-bar" id="mini-bar" style="display:none">
+  <select class="prop-input" id="font-family" style="width:120px" onchange="applyFontFamily(this.value)">
+    <option value="Arial">Arial</option>
+    <option value="Georgia">Georgia</option>
+    <option value="Times New Roman">Times New Roman</option>
+    <option value="Courier New">Courier New</option>
+    <option value="Verdana">Verdana</option>
+    <option value="Helvetica">Helvetica</option>
+  </select>
+  <input class="prop-input" id="font-size" type="number" min="6" max="96" value="16" style="width:52px" onchange="applyFontSize(this.value)"/>
+  <span class="mini-sep"></span>
+  <button class="tool-btn" onclick="applyBold()" title="Bold" id="btn-bold" style="width:32px;height:32px;font-size:.9rem;font-weight:700">B</button>
+  <button class="tool-btn" onclick="applyItalic()" title="Italic" id="btn-italic" style="width:32px;height:32px;font-size:.9rem;font-style:italic">I</button>
+  <span class="mini-sep"></span>
+  <label style="font-size:.72rem;color:var(--text3)">Color</label>
+  <input type="color" id="text-color-pick" value="#000000" onchange="applyTextColor(this.value)" style="width:28px;height:28px;border:none;cursor:pointer;border-radius:4px;background:none"/>
+  <span class="mini-sep"></span>
+  <label style="font-size:.72rem;color:var(--text3)">BG</label>
+  <input type="color" id="text-bg-pick" value="#ffffff" onchange="applyTextBg(this.value)" style="width:28px;height:28px;border:none;cursor:pointer;border-radius:4px;background:none"/>
+  <button class="tool-btn" onclick="applyTextBgNone()" style="width:32px;height:28px;font-size:.7rem" title="Transparent background">No BG</button>
+  <span class="mini-sep"></span>
+  <button class="tool-btn" onclick="deleteSelected()" style="width:32px;height:28px;font-size:.75rem;color:#ef4444" title="Delete selected">🗑</button>
+</div>
+
+<!-- ── MAIN SHELL ── -->
+<div class="editor-shell">
+
+  <!-- LEFT TOOLBAR -->
+  <div class="editor-toolbar" id="editor-toolbar" style="display:none">
+    <span class="tool-group-label">Select</span>
+    <button class="tool-btn active" id="tool-select" onclick="setTool('select')" title="Select / Move">
+      ↖ <span class="tool-label">Select</span>
+    </button>
+
+    <div class="tool-sep"></div>
+    <span class="tool-group-label">Add</span>
+
+    <button class="tool-btn" id="tool-text" onclick="setTool('text')" title="Add Text">
+      T <span class="tool-label">Text</span>
+    </button>
+    <button class="tool-btn" id="tool-sign" onclick="openSignModal()" title="Add Signature">
+      ✍ <span class="tool-label">Sign</span>
+    </button>
+    <button class="tool-btn" id="tool-image" onclick="triggerImageUpload()" title="Add Image">
+      🖼 <span class="tool-label">Image</span>
+    </button>
+    <button class="tool-btn" id="tool-sticky" onclick="setTool('sticky')" title="Sticky Note">
+      📝 <span class="tool-label">Note</span>
+    </button>
+
+    <div class="tool-sep"></div>
+    <span class="tool-group-label">Mark</span>
+
+    <button class="tool-btn" id="tool-highlight" onclick="setTool('highlight')" title="Highlight">
+      🖊 <span class="tool-label">Hilite</span>
+    </button>
+    <button class="tool-btn" id="tool-underline" onclick="setTool('underline')" title="Underline">
+      U̲ <span class="tool-label">Underline</span>
+    </button>
+    <button class="tool-btn" id="tool-draw" onclick="setTool('draw')" title="Free Draw">
+      ✏ <span class="tool-label">Draw</span>
+    </button>
+    <button class="tool-btn" id="tool-erase" onclick="setTool('erase')" title="Erase Annotation">
+      ⌫ <span class="tool-label">Erase</span>
+    </button>
+
+    <div class="tool-sep"></div>
+    <span class="tool-group-label">Pages</span>
+    <button class="tool-btn" id="btn-prev-page" onclick="edGoPage(-1)" title="Previous Page">↑ <span class="tool-label">Prev</span></button>
+    <button class="tool-btn" id="btn-next-page" onclick="edGoPage(1)"  title="Next Page">↓ <span class="tool-label">Next</span></button>
+  </div>
+
+  <!-- CANVAS AREA -->
+  <div class="editor-canvas-area" id="canvas-area">
+
+    <!-- Upload screen (shown before PDF loaded) -->
+    <div class="editor-upload-screen" id="upload-screen">
+      <div class="editor-drop-zone" id="drop-zone"
+           ondrop="edHandleDrop(event)" ondragover="event.preventDefault()"
+           onclick="editorOpenFile()">
+        <div class="dz-icon">✏️</div>
+        <h2>Open a PDF to Edit</h2>
+        <p>Drag & drop your PDF here, or click to browse.<br/>Add text, images, signatures, highlights and more.</p>
+        <button class="editor-nav-btn primary" style="pointer-events:none">📂 Browse PDF</button>
+      </div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:8px">
+        <span style="font-size:.78rem;color:var(--text3)">✏️ Edit text</span>
+        <span style="font-size:.78rem;color:var(--text3)">✍ Signature</span>
+        <span style="font-size:.78rem;color:var(--text3)">🖊 Highlight</span>
+        <span style="font-size:.78rem;color:var(--text3)">🖼 Add images</span>
+        <span style="font-size:.78rem;color:var(--text3)">📝 Sticky notes</span>
+        <span style="font-size:.78rem;color:var(--text3)">✏ Free draw</span>
+      </div>
+    </div>
+
+    <!-- PDF pages rendered here -->
+    <div id="pages-container"></div>
+
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="editor-right" id="editor-right" style="display:none">
+
+    <div class="right-section">
+      <h4>Annotation Color</h4>
+      <div class="color-row">
+        <div class="color-swatch active" style="background:#000000" onclick="setAnnotColor('#000000',this)" title="Black"></div>
+        <div class="color-swatch" style="background:#ef4444" onclick="setAnnotColor('#ef4444',this)" title="Red"></div>
+        <div class="color-swatch" style="background:#3b82f6" onclick="setAnnotColor('#3b82f6',this)" title="Blue"></div>
+        <div class="color-swatch" style="background:#10b981" onclick="setAnnotColor('#10b981',this)" title="Green"></div>
+        <div class="color-swatch" style="background:#f59e0b" onclick="setAnnotColor('#f59e0b',this)" title="Amber"></div>
+        <div class="color-swatch" style="background:#8b5cf6" onclick="setAnnotColor('#8b5cf6',this)" title="Purple"></div>
+        <input type="color" class="custom-color" value="#000000" onchange="setAnnotColor(this.value)" title="Custom"/>
+      </div>
+    </div>
+
+    <div class="right-section" id="draw-opts">
+      <h4>Draw Options</h4>
+      <div class="prop-row">
+        <span class="prop-label">Size</span>
+        <input class="prop-input" type="range" id="brush-size" min="1" max="20" value="3" oninput="brushSize=parseInt(this.value)"/>
+      </div>
+      <div class="prop-row">
+        <span class="prop-label">Opacity</span>
+        <input class="prop-input" type="range" id="brush-opacity" min="0.1" max="1" step="0.1" value="1" oninput="brushOpacity=parseFloat(this.value)"/>
+      </div>
+    </div>
+
+    <div class="right-section">
+      <h4>Highlight Color</h4>
+      <div class="color-row">
+        <div class="color-swatch" style="background:#fef08a;border:1px solid #d4b400" onclick="setHLColor('rgba(254,240,138,0.5)',this)" title="Yellow"></div>
+        <div class="color-swatch" style="background:#86efac;border:1px solid #16a34a" onclick="setHLColor('rgba(134,239,172,0.5)',this)" title="Green"></div>
+        <div class="color-swatch" style="background:#93c5fd;border:1px solid #2563eb" onclick="setHLColor('rgba(147,197,253,0.5)',this)" title="Blue"></div>
+        <div class="color-swatch" style="background:#f9a8d4;border:1px solid #db2777" onclick="setHLColor('rgba(249,168,212,0.5)',this)" title="Pink"></div>
+        <div class="color-swatch" style="background:#fdba74;border:1px solid #ea580c" onclick="setHLColor('rgba(253,186,116,0.5)',this)" title="Orange"></div>
+      </div>
+    </div>
+
+    <div class="right-section">
+      <h4>Page</h4>
+      <div class="prop-row">
+        <span class="prop-label">Page</span>
+        <span class="prop-input" id="page-info-panel" style="background:transparent;border:none;font-size:.78rem">—</span>
+      </div>
+    </div>
+
+    <div class="right-section">
+      <h4>Zoom</h4>
+      <div class="prop-row">
+        <input class="prop-input" type="range" id="zoom-slider" min="50" max="200" value="100" oninput="setZoom(parseInt(this.value))"/>
+        <span class="prop-input" id="zoom-label" style="width:42px;flex:none;background:transparent;border:none;text-align:right;font-size:.78rem">100%</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PAGE NAV (bottom) -->
+<div class="page-nav" id="page-nav" style="display:none">
+  <button class="page-nav-btn" id="prev-pg" onclick="edGoPage(-1)">◀</button>
+  <span class="page-info" id="page-info-bottom">Page 1 of 1</span>
+  <button class="page-nav-btn" id="next-pg" onclick="edGoPage(1)">▶</button>
+</div>
+
+<!-- SIGNATURE MODAL -->
+<div class="sig-modal-overlay" id="sig-modal">
+  <div class="sig-modal">
+    <h3>✍ Add Signature</h3>
+    <p>Draw your signature or type it below</p>
+    <div class="sig-tabs">
+      <button class="sig-tab active" onclick="sigSetMode('draw',this)">✏ Draw</button>
+      <button class="sig-tab" onclick="sigSetMode('type',this)">T Type</button>
+    </div>
+    <div id="sig-draw-area">
+      <canvas id="sig-canvas"></canvas>
+      <div class="sig-color-row">
+        <span class="sig-color-label">Ink color:</span>
+        <input type="color" id="sig-ink-color" value="#000000" style="width:28px;height:28px;border:none;cursor:pointer"/>
+        <span class="sig-color-label" style="margin-left:12px">Match BG:</span>
+        <input type="color" id="sig-bg-color" value="#ffffff" style="width:28px;height:28px;border:none;cursor:pointer" title="Set background color (use same as PDF page)"/>
+      </div>
+    </div>
+    <div id="sig-type-area" style="display:none">
+      <input class="sig-type-input" id="sig-text-input" placeholder="Type your name here..." oninput="renderSigText()"/>
+      <div style="display:flex;gap:8px;margin-top:8px">
+        <button class="sig-tab" onclick="sigSetFont('Dancing Script',this)">Cursive</button>
+        <button class="sig-tab" onclick="sigSetFont('Pacifico',this)">Fancy</button>
+        <button class="sig-tab" onclick="sigSetFont('Georgia',this)">Classic</button>
+      </div>
+    </div>
+    <div class="sig-actions">
+      <button class="sig-btn clear" onclick="clearSig()">🗑 Clear</button>
+      <button class="sig-btn cancel" onclick="closeSigModal()">Cancel</button>
+      <button class="sig-btn apply" onclick="applySig()">✓ Place Signature</button>
+    </div>
+  </div>
+</div>
+
+<!-- HIDDEN INPUTS -->
+<input type="file" id="pdf-file-input"   accept=".pdf"    style="display:none" onchange="edLoadPDF(event)"/>
+<input type="file" id="image-file-input" accept="image/*" style="display:none" onchange="edAddImage(event)"/>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/pdf-engine.js"></script>
+<script>
+// ── Standalone helpers for PDF Editor (no app.js dependency) ──
+
+function formatBytes(bytes) {
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+  return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+}
+
+function downloadBlob(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 8000);
+}
+
+let _toastTimer;
+function showToast(msg, type) {
+  const t = document.getElementById('toast');
+  if (!t) return;
+  t.textContent = msg;
+  t.className = 'toast show ' + (type || 'success');
+  clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+function toggleMobileMenu(){
+  var d=document.getElementById('mobile-drawer'),b=document.getElementById('hamburger');
+  if(!d||!b) return;
+  d.classList.toggle('open'); b.classList.toggle('open');
+}
+function closeMobileMenu(){
+  document.getElementById('mobile-drawer')?.classList.remove('open');
+  document.getElementById('hamburger')?.classList.remove('open');
+}
+document.addEventListener('click', function(e){
+  var d=document.getElementById('mobile-drawer'),b=document.getElementById('hamburger');
+  if(!d||!b) return;
+  if(!d.contains(e.target)&&!b.contains(e.target)){d.classList.remove('open');b.classList.remove('open');}
+});
+
+
+function editorOpenFile() {
+  var inp = document.getElementById('pdf-file-input');
+  if (inp) inp.click();
+}
+function triggerImageUpload() {
+  var inp = document.getElementById('image-file-input');
+  if (inp) inp.click();
+}
+</script>
+<script src="js/pdf-editor.js"></script>
+</body>
+</html>
