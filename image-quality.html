@@ -7,29 +7,29 @@
   <meta name="keywords" content="improve image quality, sharpen image online, upscale image, denoise photo, image enhancer, photo quality improver, free image editor"/>
   <meta name="robots" content="index, follow"/>
   <meta name="author" content="AIFreePDF"/>
-  <link rel="canonical" href="https://aifreepdf.com/image-quality.html"/>
+  <link rel="canonical" href="https://aifreepdf.vercel.app/image-quality.html"/>
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://aifreepdf.com/image-quality.html"/>
+  <meta property="og:url" content="https://aifreepdf.vercel.app/image-quality.html"/>
   <meta property="og:title" content="Improve Image Quality – AIFreePDF"/>
   <meta property="og:description" content="Improve image quality online for free. Sharpen blurry photos, upscale resolution, remove compression noise, or manually adjust brightness and contrast — all in your browser."/>
-  <meta property="og:image" content="https://aifreepdf.com/favicon.png"/>
+  <meta property="og:image" content="https://aifreepdf.vercel.app/favicon.png"/>
   <meta property="og:site_name" content="AIFreePDF"/>
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:title" content="Improve Image Quality – AIFreePDF"/>
   <meta name="twitter:description" content="Improve image quality online for free. Sharpen blurry photos, upscale resolution, remove compression noise, or manually adjust brightness and contrast — all in your browser."/>
-  <meta name="twitter:image" content="https://aifreepdf.com/favicon.png"/>
+  <meta name="twitter:image" content="https://aifreepdf.vercel.app/favicon.png"/>
 
   <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Website",
+    "@type": "WebApplication",
     "name": "Improve Image Quality – AIFreePDF",
-    "url": "https://aifreepdf.com/image-quality.html",
+    "url": "https://aifreepdf.vercel.app/image-quality.html",
     "applicationCategory": "Utility",
     "operatingSystem": "Any",
     "offers": {
@@ -42,12 +42,12 @@
   </script>
 
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NQWJS32GTN"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4LRDE0PHS7"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-NQWJS32GTN');
+    gtag('config', 'G-4LRDE0PHS7');
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <link rel="icon" href="favicon.png" type="image/png" sizes="48x48">
@@ -62,7 +62,7 @@
 <!-- ── NAVBAR ── -->
 <nav class="navbar">
   <div class="nav-inner">
-    <a href="#" class="logo">AIFree<span>PDF</span></a>
+    <a href="index.html" class="logo">AIFree<span>PDF</span></a>
     <div class="nav-links">
       <a href="#tools">Tools</a>
       <a href="#how">How it Works</a>
@@ -71,7 +71,18 @@
     </div>
     <div class="nav-right">
       <button class="nav-cta" onclick="scrollToTools()">Get Started</button>
+      <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </div>
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobile-drawer">
+    <a href="index.html#tools" onclick="closeMobileMenu()">Tools</a>
+    <a href="index.html#how" onclick="closeMobileMenu()">How it Works</a>
+    <a href="index.html#faq" onclick="closeMobileMenu()">FAQ</a>
+    <a href="blog.html" onclick="closeMobileMenu()">Blog</a>
+    <button class="nav-cta mobile-cta" onclick="closeMobileMenu();scrollToTools()">Get Started</button>
   </div>
 </nav>
 
@@ -86,134 +97,94 @@
 <!-- ── TOOL WORKSPACE ── -->
 <section class="workspace visible" id="workspace">
   <div class="container">
-
     <div class="tool-panel active" id="panel-imagequality">
       <div class="panel-header">
         <button class="back-btn" onclick="window.location.href='index.html#tools'">← All Tools</button>
-        <h2>✨ Improve Image Quality</h2>
-        <p>Choose how you want to enhance your image</p>
+        <h2>✨ Auto Image Enhancer</h2>
+        <p>Upload your image — AI automatically enhances clarity, sharpness, and color</p>
       </div>
 
-      <!-- STEP 1: Upload -->
-      <div class="upload-zone" id="imgq-zone" ondrop="handleDrop(event,'imgq')" ondragover="preventDefault(event)" onclick="triggerInput('imgq-input')">
-        <div class="upload-icon">🖼️</div>
-        <p>Drag & Drop Image here</p>
-        <span>JPG, PNG, WEBP supported · or click to browse</span>
-        <input type="file" id="imgq-input" accept="image/*" style="display:none" onchange="handleFile(event,'imgq')"/>
+      <!-- Feature badges -->
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">
+        <span style="padding:5px 12px;background:rgba(20,184,166,0.08);border:1px solid rgba(20,184,166,0.2);border-radius:100px;font-size:.75rem;font-weight:600;color:#2dd4bf">🔍 Auto Sharpen</span>
+        <span style="padding:5px 12px;background:rgba(20,184,166,0.08);border:1px solid rgba(20,184,166,0.2);border-radius:100px;font-size:.75rem;font-weight:600;color:#2dd4bf">🎨 Color Boost</span>
+        <span style="padding:5px 12px;background:rgba(20,184,166,0.08);border:1px solid rgba(20,184,166,0.2);border-radius:100px;font-size:.75rem;font-weight:600;color:#2dd4bf">🧹 Noise Remove</span>
+        <span style="padding:5px 12px;background:rgba(20,184,166,0.08);border:1px solid rgba(20,184,166,0.2);border-radius:100px;font-size:.75rem;font-weight:600;color:#2dd4bf">📐 2× Upscale</span>
+        <span style="padding:5px 12px;background:rgba(20,184,166,0.08);border:1px solid rgba(20,184,166,0.2);border-radius:100px;font-size:.75rem;font-weight:600;color:#2dd4bf">🔆 Contrast Fix</span>
       </div>
-      <div class="file-list" id="imgq-files"></div>
 
-      <!-- STEP 2: Mode selector card (the "single card, multiple options" the user asked for) -->
-      <div class="iq-card" id="imgq-options" style="display:none">
+      <!-- Upload Zone -->
+      <div id="imgq-zone"
+           ondrop="iqHandleDrop(event)"
+           ondragover="event.preventDefault();this.style.borderColor='rgba(20,184,166,0.8)';this.style.background='rgba(20,184,166,0.06)'"
+           ondragleave="this.style.borderColor='rgba(20,184,166,0.3)';this.style.background='rgba(20,184,166,0.02)'"
+           onclick="document.getElementById('imgq-input').click()"
+           style="border:2px dashed rgba(20,184,166,0.3);border-radius:20px;padding:52px 24px;text-align:center;cursor:pointer;background:rgba(20,184,166,0.02);transition:all .25s;margin-bottom:20px">
+        <div style="font-size:2.8rem;margin-bottom:16px">🖼️</div>
+        <p style="font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:8px">Drop your image here</p>
+        <span style="font-size:.875rem;color:var(--text3);display:block;margin-bottom:20px">JPG · PNG · WEBP · BMP — Any blurry, dark, or unclear image</span>
+        <div style="display:inline-block;padding:10px 24px;background:linear-gradient(135deg,#14b8a6,#0f766e);color:#fff;border-radius:8px;font-size:.875rem;font-weight:700">Browse Files</div>
+        <input type="file" id="imgq-input" accept="image/*" style="display:none" onchange="iqLoadFile(event)"/>
+      </div>
 
-        <div class="iq-card-header">
-          <h3>What do you want to do?</h3>
-          <p>Select one enhancement mode below</p>
-        </div>
-
-        <div class="iq-mode-grid">
-          <button class="iq-mode-btn active" data-mode="sharpen" onclick="selectIQMode(this,'sharpen')">
-            <span class="iq-mode-icon">🔍</span>
-            <span class="iq-mode-title">Sharpen Image</span>
-            <span class="iq-mode-desc">Fix blurry photos and add crisp detail</span>
-          </button>
-
-          <button class="iq-mode-btn" data-mode="upscale" onclick="selectIQMode(this,'upscale')">
-            <span class="iq-mode-icon">📐</span>
-            <span class="iq-mode-title">Upscale Resolution</span>
-            <span class="iq-mode-desc">Increase image size while staying clean</span>
-          </button>
-
-          <button class="iq-mode-btn" data-mode="denoise" onclick="selectIQMode(this,'denoise')">
-            <span class="iq-mode-icon">🧹</span>
-            <span class="iq-mode-title">Remove Noise</span>
-            <span class="iq-mode-desc">Clean up compression artifacts and grain</span>
-          </button>
-
-          <button class="iq-mode-btn" data-mode="manual" onclick="selectIQMode(this,'manual')">
-            <span class="iq-mode-icon">🎛️</span>
-            <span class="iq-mode-title">Manual Adjust</span>
-            <span class="iq-mode-desc">Fine-tune brightness, contrast & sharpness</span>
-          </button>
-        </div>
-
-        <!-- Mode-specific controls -->
-        <div class="iq-mode-panel" id="iq-panel-sharpen">
-          <div class="option-group">
-            <label>Sharpen Strength</label>
-            <input type="range" id="iq-sharpen-amount" min="1" max="10" value="5" oninput="updateRangeLabel('iq-sharpen-amount','iq-sharpen-val')"/>
-            <div class="iq-range-row"><span>Subtle</span><span id="iq-sharpen-val" class="iq-range-val">5</span><span>Strong</span></div>
+      <!-- Processing state -->
+      <div id="iq-processing" style="display:none;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px 24px;margin-top:20px">
+        <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:24px">
+          <div class="iq-proc-step" id="iq-step-1" style="display:flex;align-items:center;gap:12px;font-size:.875rem;color:var(--text3)">
+            <div class="iq-proc-dot" style="width:10px;height:10px;border-radius:50%;background:var(--border2);flex-shrink:0"></div>
+            <span>Analyzing image quality</span>
+          </div>
+          <div class="iq-proc-step" id="iq-step-2" style="display:flex;align-items:center;gap:12px;font-size:.875rem;color:var(--text3)">
+            <div class="iq-proc-dot" style="width:10px;height:10px;border-radius:50%;background:var(--border2);flex-shrink:0"></div>
+            <span>Removing noise &amp; artifacts</span>
+          </div>
+          <div class="iq-proc-step" id="iq-step-3" style="display:flex;align-items:center;gap:12px;font-size:.875rem;color:var(--text3)">
+            <div class="iq-proc-dot" style="width:10px;height:10px;border-radius:50%;background:var(--border2);flex-shrink:0"></div>
+            <span>Sharpening edges &amp; details</span>
+          </div>
+          <div class="iq-proc-step" id="iq-step-4" style="display:flex;align-items:center;gap:12px;font-size:.875rem;color:var(--text3)">
+            <div class="iq-proc-dot" style="width:10px;height:10px;border-radius:50%;background:var(--border2);flex-shrink:0"></div>
+            <span>Enhancing color &amp; contrast</span>
+          </div>
+          <div class="iq-proc-step" id="iq-step-5" style="display:flex;align-items:center;gap:12px;font-size:.875rem;color:var(--text3)">
+            <div class="iq-proc-dot" style="width:10px;height:10px;border-radius:50%;background:var(--border2);flex-shrink:0"></div>
+            <span>Final quality polish</span>
           </div>
         </div>
+        <div style="height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin-bottom:10px">
+          <div id="iq-proc-bar" style="height:100%;width:0%;background:linear-gradient(90deg,#14b8a6,#8b5cf6);border-radius:3px;transition:width .4s ease"></div>
+        </div>
+        <div id="iq-proc-label" style="font-size:.82rem;color:var(--text3);text-align:center">Preparing...</div>
+      </div>
 
-        <div class="iq-mode-panel" id="iq-panel-upscale" style="display:none">
-          <div class="option-group">
-            <label>Scale Factor</label>
-            <div class="iq-scale-btns">
-              <button class="iq-scale-btn active" data-scale="1.5" onclick="selectScale(this)">1.5×</button>
-              <button class="iq-scale-btn" data-scale="2" onclick="selectScale(this)">2×</button>
-              <button class="iq-scale-btn" data-scale="3" onclick="selectScale(this)">3×</button>
-              <button class="iq-scale-btn" data-scale="4" onclick="selectScale(this)">4×</button>
+      <!-- Before / After result -->
+      <div id="iq-result" style="display:none;margin-top:24px">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:20px">
+          <div style="padding:6px 16px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.25);border-radius:100px;font-size:.82rem;font-weight:700;color:#34d399">✅ Enhancement Complete</div>
+          <div id="iq-result-stats" style="font-size:.8rem;color:var(--text3)"></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;flex-wrap:wrap">
+          <div style="flex:1;min-width:140px;display:flex;flex-direction:column;gap:8px">
+            <span style="font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);text-align:center">Before</span>
+            <div style="border-radius:10px;overflow:hidden;border:1px solid var(--border);background:#000">
+              <img id="iq-before-img" alt="Original" style="width:100%;display:block;max-height:360px;object-fit:contain"/>
             </div>
           </div>
-          <p class="iq-note">Higher scale factors take longer to process and produce larger files.</p>
-        </div>
-
-        <div class="iq-mode-panel" id="iq-panel-denoise" style="display:none">
-          <div class="option-group">
-            <label>Denoise Level</label>
-            <input type="range" id="iq-denoise-amount" min="1" max="10" value="5" oninput="updateRangeLabel('iq-denoise-amount','iq-denoise-val')"/>
-            <div class="iq-range-row"><span>Light</span><span id="iq-denoise-val" class="iq-range-val">5</span><span>Heavy</span></div>
-          </div>
-          <p class="iq-note">Higher denoise levels smooth more grain but may soften fine detail.</p>
-        </div>
-
-        <div class="iq-mode-panel" id="iq-panel-manual" style="display:none">
-          <div class="option-group">
-            <label>Brightness</label>
-            <input type="range" id="iq-brightness" min="-50" max="50" value="0" oninput="updateRangeLabel('iq-brightness','iq-brightness-val')"/>
-            <div class="iq-range-row"><span>Darker</span><span id="iq-brightness-val" class="iq-range-val">0</span><span>Brighter</span></div>
-          </div>
-          <div class="option-group">
-            <label>Contrast</label>
-            <input type="range" id="iq-contrast" min="-50" max="50" value="0" oninput="updateRangeLabel('iq-contrast','iq-contrast-val')"/>
-            <div class="iq-range-row"><span>Flat</span><span id="iq-contrast-val" class="iq-range-val">0</span><span>Punchy</span></div>
-          </div>
-          <div class="option-group">
-            <label>Sharpness</label>
-            <input type="range" id="iq-manual-sharp" min="0" max="10" value="0" oninput="updateRangeLabel('iq-manual-sharp','iq-manual-sharp-val')"/>
-            <div class="iq-range-row"><span>Soft</span><span id="iq-manual-sharp-val" class="iq-range-val">0</span><span>Crisp</span></div>
-          </div>
-          <div class="option-group">
-            <label>Saturation</label>
-            <input type="range" id="iq-saturation" min="-50" max="50" value="0" oninput="updateRangeLabel('iq-saturation','iq-saturation-val')"/>
-            <div class="iq-range-row"><span>Muted</span><span id="iq-saturation-val" class="iq-range-val">0</span><span>Vivid</span></div>
+          <div style="font-size:1.5rem;color:#14b8a6;flex-shrink:0">→</div>
+          <div style="flex:1;min-width:140px;display:flex;flex-direction:column;gap:8px">
+            <span style="font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#14b8a6;text-align:center">After</span>
+            <div style="border-radius:10px;overflow:hidden;border:1px solid var(--border);background:#000">
+              <canvas id="iq-after-canvas" style="width:100%;display:block;max-height:360px"></canvas>
+            </div>
           </div>
         </div>
-
-        <!-- Live preview -->
-        <div class="iq-preview-wrap" id="iq-preview-wrap" style="display:none">
-          <div class="iq-preview-box">
-            <span class="iq-preview-label">Before</span>
-            <canvas id="iq-canvas-before"></canvas>
-          </div>
-          <div class="iq-preview-arrow">→</div>
-          <div class="iq-preview-box">
-            <span class="iq-preview-label">After</span>
-            <canvas id="iq-canvas-after"></canvas>
-          </div>
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+          <button class="btn-primary" onclick="iqDownload()" style="flex:1">⬇ Download Enhanced Image</button>
+          <button onclick="iqReset()" style="background:none;border:1px solid var(--border);color:var(--text2);padding:13px 20px;border-radius:var(--radius-sm);cursor:pointer;font-size:.875rem;font-weight:600;transition:all .2s;white-space:nowrap">↺ Try Another</button>
         </div>
-
-        <div class="progress-container" id="imgq-progress" style="display:none">
-          <div class="progress-label"><span id="imgq-status">Processing...</span><span id="imgq-pct">0%</span></div>
-          <div class="progress-bar"><div class="progress-fill-bar" id="imgq-bar"></div></div>
-        </div>
-
-        <button class="btn-primary full-width" onclick="applyImageQuality()">✨ Apply & Download</button>
       </div>
 
     </div>
-
   </div>
 </section>
 
@@ -280,6 +251,13 @@
         <div class="tool-icon" style="background:linear-gradient(135deg,#14b8a6,#0f766e)">✨</div>
         <h3>Improve Image Quality</h3>
         <p>Sharpen, upscale, denoise, or fine-tune any image</p>
+      </div>
+
+      <div class="tool-card" data-tool="pdfeditor" onclick="window.location.href='pdf-editor.html'">
+        <div class="tool-tag" style="background:linear-gradient(90deg,#f59e0b,#ef4444);color:#fff;border:none">✏️ New</div>
+        <div class="tool-icon" style="background:linear-gradient(135deg,#f59e0b,#b45309)">✏️</div>
+        <h3>PDF Editor</h3>
+        <p>Add text, images, signatures, highlights & annotations to any PDF</p>
       </div>
 
     </div>
@@ -351,20 +329,19 @@
   <div class="container">
     <div class="footer-inner">
       <div class="footer-brand">
-        <a href="#" class="logo">AIFree<span>PDF</span></a>
+        <a href="index.html" class="logo">AIFree<span>PDF</span></a>
         <p>Professional PDF tools. Free forever. Private by design.</p>
       </div>
       <div class="footer-links">
-    <span><a href="compress-pdf.html">PDF Compressor</a></span>
-    <span><a href="jpg-to-pdf.html">Image to PDF</a></span>
-    <span><a href="merge-pdf.html">Merge PDF</a></span>
-    <span><a href="split-pdf.html">Split PDF</a></span>
-    <span><a href="rotate-pdf.html">Rotate PDF</a></span>
-    <span><a href="pdf-to-jpg.html">PDF to Images</a></span>
-    <span><a href="image-quality.html">Improve Image Quality</a></span>
-    <span><a href="privacy-policy.html">Privacy Policy</a></span>
-</div>
-
+        <a href="compress-pdf.html" style="color:var(--text3);text-decoration:none">PDF Compressor</a>
+        <a href="jpg-to-pdf.html" style="color:var(--text3);text-decoration:none">Image to PDF</a>
+        <a href="merge-pdf.html" style="color:var(--text3);text-decoration:none">Merge PDF</a>
+        <a href="split-pdf.html" style="color:var(--text3);text-decoration:none">Split PDF</a>
+        <a href="rotate-pdf.html" style="color:var(--text3);text-decoration:none">Rotate PDF</a>
+        <a href="pdf-to-jpg.html" style="color:var(--text3);text-decoration:none">PDF to Images</a>
+        <a href="image-quality.html" style="color:var(--text3);text-decoration:none">Improve Image Quality</a>
+        <a href="privacy-policy.html" style="color:var(--text3);text-decoration:none">Privacy Policy</a>
+      </div>
     </div>
     <div class="footer-bottom">
       <p>© 2026 AIFreePDF · All processing happens in your browser · No data collected</p>
@@ -428,5 +405,6 @@
 <script src="js/pdf-engine.js"></script>
 <script src="js/app.js"></script>
 <script src="js/image-quality.js"></script>
+<script src="js/auto-enhance.js"></script>
 </body>
 </html>
